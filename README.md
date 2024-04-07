@@ -1,7 +1,7 @@
 # adopsiak
 
 # Projekt Interfejsu
-[Projekt w Figmie](https://www.figma.com/file/45PQxAGEIn9Ok8pLJ5MPvV/AdoPsiak?type=design&node-id=0%3A1&mode=design&t=jXe8pD8m5lhMs5xF-1)
+[Projekt w Figmie](https://www.figma.com/file/45PQxAGEIn9Ok8pLJ5MPvV/AdoPsiak?type=design&node-id=0%3A1&mode=design&t=jXe8pD8m5lhMs5xF-1)/ [Prototyp](https://www.figma.com/proto/45PQxAGEIn9Ok8pLJ5MPvV/AdoPsiak?type=design&node-id=1-2&t=P1KMIOxGVqmgxdMa-1&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A2&show-proto-sidebar=1&mode=design)
 # Opis aplikacji
 Adopsiak to aplikacja internetowa schroniska dla psów i kotów. Umożliwia zapoznanie się ze zwierzętami przebywającymi w schronisku, jak również wsparcie ich finansowo lub poprzez adopcję.
 # Opis techniczny
