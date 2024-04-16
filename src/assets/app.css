@@ -1,0 +1,54 @@
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* padding: .5rem; */
+}
+header{
+    padding: 15px;
+    background-color: rgb(94, 169, 59);
+    color: white;
+    
+}
+ nav a+a {
+    margin-left: 1rem;
+} 
+nav{
+    background-color: white;
+    padding: 10px;
+    justify-content: flex-end;
+    
+} 
+main{
+    flex: 1;
+    background-color: white;
+    padding: 1rem;
+    
+}
+footer{
+    background-color: rgb(94, 169, 59);
+    padding: 50px;
+    text-align: center;
+
+}
+.nav-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    text-decoration: none; /* Usunięcie podkreślenia */
+    cursor: pointer;
+  }
+
+.nav-button:first-child {
+    margin-right: 0; /* Usuń margines dla ostatniego przycisku */
+}
