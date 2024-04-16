@@ -1,10 +1,12 @@
 <template>
-  
-  <div class = "wrapper">
-    <page-header></page-header>  
-    <page-nav>
-      <div class="logo"></div>
-        <router-link to="/" class="nav-button">Strona główna</router-link>
+  <div>
+    <page-header></page-header>
+    <div class = "wrapper">
+ 
+    <page-nav>  
+      <router-link to="/" class="logo-container">
+        <img src="/kot_pies.jpg" alt="Logo">
+      </router-link>        
         <router-link to="/about" class="nav-button">O nas</router-link>
         <router-link to="/animals" class="nav-button">Zwierzęta</router-link>
         <router-link to="/support" class="nav-button">Wsparcie</router-link>
@@ -16,6 +18,7 @@
       <router-view></router-view>
     </page-main>
     <page-footer></page-footer>
+    </div>
   </div>
   
 </template>

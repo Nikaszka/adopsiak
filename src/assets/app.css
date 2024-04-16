@@ -9,21 +9,24 @@ body{
     display: flex;
     flex-direction: column;
     height: 100vh;
+    justify-content: space-between;
     /* padding: .5rem; */
 }
 header{
-    padding: 15px;
+    padding: 30px;
     background-color: rgb(94, 169, 59);
     color: white;
+    position: relative;
     
 }
  nav a+a {
     margin-left: 1rem;
 } 
 nav{
+    display: flex;
+    justify-content: flex-end;
     background-color: white;
     padding: 10px;
-    justify-content: flex-end;
     
 } 
 main{
@@ -43,12 +46,13 @@ footer{
     color: black;
     border: none;
     padding: 10px 20px;
-    margin-right: 10px;
+    margin-right: 40px;
     border-radius: 5px;
     text-decoration: none; /* Usunięcie podkreślenia */
     cursor: pointer;
-  }
+  } 
 
-.nav-button:first-child {
-    margin-right: 0; /* Usuń margines dla ostatniego przycisku */
+.logo-container img {
+   width: 100px; 
+   height: auto; 
 }

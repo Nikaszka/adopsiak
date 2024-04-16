@@ -1,3 +1,3 @@
 <template>
-    <header><slot>Page Header</slot></header>
+    <header><slot></slot></header>
 </template>
