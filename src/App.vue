@@ -9,5 +9,5 @@ const title = ref('Adopsiak')
 </script>
 
 <style scoped>
-  .c2 {color: rgb(27, 118, 35)}
+  .c2 {color: rgb(19, 97, 110)}
 </style>
