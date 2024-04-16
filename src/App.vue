@@ -1,24 +1,25 @@
 <template>
   <div>
-    <page-header></page-header>
-    <div class = "wrapper">
- 
-    <page-nav>  
-      <router-link to="/" class="logo-container">
-        <img src="/kot_pies.jpg" alt="Logo">
-      </router-link>        
-        <router-link to="/about" class="nav-button">O nas</router-link>
-        <router-link to="/animals" class="nav-button">Zwierzęta</router-link>
-        <router-link to="/support" class="nav-button">Wsparcie</router-link>
-        <router-link to="/adoption" class="nav-button">Adopcja</router-link>
-        <router-link to="/contact" class="nav-button">Kontakt</router-link>
-    </page-nav>
-  
+    <div class = "headers">
+        <page-header></page-header>
+        <router-link to="/" class="logo-container" >
+          <img src="/kot_pies.jpg" alt="Logo">
+        </router-link>
+        <page-nav>  
+                
+          <router-link to="/about" class="nav-button">O nas</router-link>
+          <router-link to="/animals" class="nav-button">Zwierzęta</router-link>
+          <router-link to="/support" class="nav-button">Wsparcie</router-link>
+          <router-link to="/adoption" class="nav-button">Adopcja</router-link>
+          <router-link to="/contact" class="nav-button">Kontakt</router-link>
+        </page-nav>
+      </div>
+       
     <page-main>
       <router-view></router-view>
     </page-main>
+
     <page-footer></page-footer>
-    </div>
   </div>
   
 </template>
