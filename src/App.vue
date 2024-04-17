@@ -1,10 +1,12 @@
 <template>
   <div>
     <div class = "headers">
-        <page-header></page-header>
-        <router-link to="/" class="logo-container" >
+        <page-header>
+          <router-link to="/" class="logo-container" >
           <img src="/kot_pies.jpg" alt="Logo">
         </router-link>
+        </page-header>
+        
         <page-nav>  
                 
           <router-link to="/about" class="nav-button">O nas</router-link>
