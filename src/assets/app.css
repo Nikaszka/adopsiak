@@ -56,8 +56,29 @@ footer{
 }
 
 .logo-footer img{
-   width: 150px; 
+   width: 170px; 
    height: auto;
    margin-top: 10px;
    margin-bottom: 10px;
+}
+
+.footer-menu{
+    text-align: left;
+}
+
+.footer-menu-buttons{
+    color : white !important;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;    
+}
+
+.footer-menu ul li {
+    margin-bottom: 10px; /* Zwiększenie odstępu między elementami li */
+    color: white;
+}
+
+ul {
+    margin-top: 10px; /* Zwiększenie odstępu między elementami li */
+    list-style-type: none;
 }

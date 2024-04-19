@@ -7,8 +7,7 @@
         </router-link>
         </page-header>
         
-        <page-nav>  
-                
+        <page-nav>                  
           <router-link to="/about" class="nav-button">O nas</router-link>
           <router-link to="/animals" class="nav-button">Zwierzęta</router-link>
           <router-link to="/support" class="nav-button">Wsparcie</router-link>
