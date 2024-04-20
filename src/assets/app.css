@@ -8,9 +8,10 @@ body{
 header{
     padding: 30px;
     background-color: rgb(94, 169, 59);
-    color: white;
-    /* position: relative; */
+    color: white; 
     
+    display: flex;
+    justify-content: space-between;
 }
  nav a+a {
     margin-left: 1rem;
@@ -74,11 +75,15 @@ footer{
 }
 
 .footer-menu ul li {
-    margin-bottom: 10px; /* Zwiększenie odstępu między elementami li */
+    margin-bottom: 10px; 
     color: white;
 }
 
 ul {
-    margin-top: 10px; /* Zwiększenie odstępu między elementami li */
+    margin-top: 10px;
     list-style-type: none;
+}
+
+.header-info span{
+    padding: 150px;
 }

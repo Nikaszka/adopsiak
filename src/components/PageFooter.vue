@@ -20,10 +20,11 @@
     <div class="footer-menu">
       <ul>
         <li><h4>Kontakt</h4></li>
-        <li>adopsiak@gmail.com</li>
-        <li>+555 444 333</li>      
-        <li>AdoPsiak sp.z.o.o <br> ul. Słoneczna 25 <br> 30-500 Kraków</li>
+        <li><font-awesome-icon icon="envelope"/> adopsiak@gmail.com</li>
+        <li><font-awesome-icon icon="phone" /> + 555 444 333</li>      
+        <li><font-awesome-icon icon="location-dot"/> AdoPsiak sp.z.o.o <br> ul. Słoneczna 25 <br> 30-500 Kraków</li>
         <li>poniedziałek - piątek <br> 9:00-18:00</li>
+        
       </ul>  
     </div>
   </div>

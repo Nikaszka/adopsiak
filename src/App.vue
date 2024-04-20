@@ -1,12 +1,7 @@
 <template>
   <div>
-    <div class = "headers">
-        <page-header>
-          <router-link to="/" class="logo-container" >
-          <img src="/kot_pies.jpg" alt="Logo">
-        </router-link>
-        </page-header>
-        
+    <!-- <div class = "headers"> -->
+        <page-header> </page-header>       
         <page-nav>                  
           <router-link to="/about" class="nav-button">O nas</router-link>
           <router-link to="/animals" class="nav-button">Zwierzęta</router-link>
@@ -21,8 +16,7 @@
     </page-main>
 
     <page-footer></page-footer>
-  </div>
-  
+  <!-- </div> -->
 </template>
 
 
@@ -32,4 +26,5 @@ import PageHeader from './components/PageHeader.vue'
 import PageNav from './components/PageNav.vue'
 import PageFooter from './components/PageFooter.vue'
 import PageMain from './components/PageMain.vue'
+
 </script>
