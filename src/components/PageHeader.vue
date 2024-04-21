@@ -11,8 +11,8 @@
           <span><font-awesome-icon icon="envelope"/>  adopsiak@gmail.com</span>
         </div>
 
-        <div>
-          <span><font-awesome-icon :icon="['fab', 'instagram']"/></span>
+        <div class = "header-social-icons">
+          <span><font-awesome-icon :icon="['fab', 'instagram']" /></span>
           <span><font-awesome-icon :icon="['fab', 'facebook']"/></span>
         </div>
 

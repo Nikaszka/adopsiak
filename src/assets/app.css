@@ -21,13 +21,16 @@ nav{
     justify-content: flex-end;
     background-color: white;
     padding: 10px;
-    
+    border-bottom: 2px solid rgba(126, 121, 121, 0.5);
+    border-left: 2px solid rgba(126, 121, 121, 0.5);
+    border-right: 2px solid rgba(126, 121, 121, 0.5); 
+    /* box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);  */
 } 
 main{
     flex: 1;
     background-color: white;
-    height: calc(100vh - 1rem);
-    padding: 10px;
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 footer{
     background-color: rgb(94, 169, 59);
@@ -85,5 +88,46 @@ ul {
 }
 
 .header-info span{
-    padding: 150px;
+    padding: 170px;
+}
+.header-social-icons span{
+    margin-left: 10px;
+}
+
+.percent-tax-rate-box{
+    background-color: rgb(176, 212, 159);
+    margin-left: 300px;
+    margin-right: 300px;
+    /* margin-top: 70px; */
+    align-items: center;
+    border-radius: 10px;
+    padding-bottom: 15px;
+}
+
+.percent-tax-rate-images img{
+  width: 240px;
+  padding: 15px;
+  margin-left: 20px;
+}
+
+.percent-tax-rate-title{
+    text-align: center;
+    padding: 20px;
+    font-size: 35px;
+}
+
+
+.KRS-info{
+    background-color: rgb(130, 78, 78);
+    color: white;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 10px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.container{
+    display: grid;
+    grid-template-rows: auto;
 }

@@ -1,3 +1,4 @@
 <template>
-    <main><slot>Page Main</slot></main>
+    <main><slot>Page Main</slot>  
+    </main>
 </template>
