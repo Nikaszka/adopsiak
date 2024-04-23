@@ -4,11 +4,11 @@ import App from './App.vue'
 import './assets/app.css'
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPhone, faEnvelope, faLocationDot, faHeart, faHandHoldingDollar, faHouse} from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope, faLocationDot, faHeart, faHandHoldingDollar, faHouse, faVenusMars, faPaw} from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faPhone, faEnvelope, faLocationDot, faInstagram, faFacebook, faHeart, faHandHoldingDollar, faHouse);
+library.add(faPhone, faEnvelope, faLocationDot, faInstagram, faFacebook, faHeart, faHandHoldingDollar, faHouse, faVenusMars, faPaw);
 
 createApp(App)
 .component('font-awesome-icon', FontAwesomeIcon)
