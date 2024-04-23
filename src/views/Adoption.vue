@@ -25,7 +25,7 @@
     <div class="section-container">
         <div class="adoption-container">
             <div class="step-image">
-                <img src="/pies1.jpg" alt="Wypełnij formularz adopcyjny" class="step-img" />
+                <img src="/stroller.png" alt="Wypełnij formularz adopcyjny" class="step-img" />
             </div>
             <div class="step-description">
                 <h2 class="adoption-title">Adopcja młodych zwierząt</h2>
@@ -42,7 +42,7 @@
             Nie wahaj się, dołącz do naszej misji i daj bezdomnym zwierzakom szansę na nowe, kochające domy!
         </h2>
         <div class="refusal-info">
-            <img src="/pies1.jpg"
+            <img src="/caution-sign.png"
                 alt="Odmowa adopcji" class="refusal-icon" />
             <h3 class="percent-tax-rate-title">Odmowa adopcji</h3>
         </div>
@@ -66,37 +66,37 @@ export default {
                 {
                     title: "Krok 1: Przeglądaj zwierzaki",
                     description: "Rozpocznij swoją przygodę od przeglądania galerii zdjęć i opisów naszych wspaniałych podopiecznych. Każde zwierzę ma swoją własną historię i charakter, więc z pewnością znajdziesz kogoś, kto poruszy Twoje serce.",
-                    imageUrl: "/pies1.jpg",
+                    imageUrl: "/finding.png",
                     alt: "Przeglądaj zwierzaki"
                 },
                 {
                     title: "Krok 2: Wypełnij formularz adopcyjny",
                     description: "Gdy już znalazłeś zwierzaka, który przyciągnął Twoją uwagę, wypełnij nasz formularz adopcyjny online. Podziel się z nami informacjami na temat Twojego domu, stylu życia i oczekiwań wobec nowego przyjaciela. Im więcej informacji, tym łatwiej dopasujemy zwierzaka do Twoich potrzeb.",
-                    imageUrl: "/pies1.jpg",
+                    imageUrl: "/document.png",
                     alt: "Wypełnij formularz adopcyjny"
                 },
                 {
                     title: "Krok 3: Rozmowa telefoniczna",
                     description: "Po złożeniu formularza, nasz zespół skontaktuje się z Tobą telefonicznie, aby omówić Twoje preferencje oraz odpowiedzieć na wszelkie pytania związane z adopcją. To również doskonała okazja do omówienia szczegółów dotyczących opieki nad zwierzakiem.",
-                    imageUrl: "/pies1.jpg",
+                    imageUrl: "/phone.png",
                     alt: " Rozmowa telefoniczna"
                 },
                 {
                     title: "Krok 4: Spotkanie z zwierzakiem",
                     description: "Umów się na spotkanie z wybranym zwierzakiem, aby lepiej się poznać i upewnić, czy to idealny towarzysz dla Ciebie. To także świetna okazja, aby zobaczyć, jak zwierzak reaguje na Ciebie i swoje nowe otoczenie.",
-                    imageUrl: "/pies1.jpg",
+                    imageUrl: "/play-with-pet.png",
                     alt: "Spotkanie z zwierzakiem"
                 },
                 {
                     title: "Krok 5: Podpisanie umowy adopcyjnej",
                     description: "Jeśli po spotkaniu zdecydujesz się na adopcję, podpiszemy umowę adopcyjną, która określa warunki adopcji oraz zobowiązania obu stron. Ta formalność zapewnia, że zarówno Ty, jak i zwierzak, dostaniecie odpowiednią opiekę i wsparcie.",
-                    imageUrl: "/pies1.jpg",
+                    imageUrl: "/contract.png",
                     alt: "Podpisanie umowy adopcyjnej"
                 },
                 {
                     title: "Krok 6: Odbierz nowego przyjaciela",
                     description: "Wyznacz termin odbioru nowego przyjaciela i przygotuj się na radosne powitanie w domu! Zapewniamy Cię, że to początek niezwykłej przygody pełnej miłości i przyjaźni.",
-                    imageUrl: "/pies1.jpg",
+                    imageUrl: "/adopt.png",
                     alt: "Odbierz nowego przyjaciela"
                 }
             ]
