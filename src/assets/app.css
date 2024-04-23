@@ -1,45 +1,57 @@
 html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-body{
+
+body {
     margin: 0;
     padding: 0;
 }
-header{
+
+header {
     padding: 30px;
     background-color: rgb(94, 169, 59);
-    color: white; 
-    
+    color: white;
+
     display: flex;
     justify-content: space-between;
 }
- nav a+a {
+
+nav a+a {
     margin-left: 1rem;
-} 
-nav{
+}
+
+nav {
     display: flex;
     justify-content: flex-end;
     background-color: white;
     padding: 10px;
     border-bottom: 2px solid rgba(126, 121, 121, 0.5);
     border-left: 2px solid rgba(126, 121, 121, 0.5);
-    border-right: 2px solid rgba(126, 121, 121, 0.5); 
+    border-right: 2px solid rgba(126, 121, 121, 0.5);
     /* box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);  */
-} 
-main{
+}
+
+main {
     flex: 1;
     background-color: white;
     margin-bottom: 50px;
     margin-top: 50px;
 }
-footer{
+
+footer {
     background-color: rgb(94, 169, 59);
-    display: flex; 
+    display: flex;
     align-items: center;
 }
-.column{
+
+.column {
     flex: 1;
     text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto;
 }
 
 .nav-button {
@@ -49,36 +61,39 @@ footer{
     padding: 10px 20px;
     margin-right: 80px;
     border-radius: 5px;
-    text-decoration: none; /* Usunięcie podkreślenia */
+    text-decoration: none;
+    /* Usunięcie podkreślenia */
     cursor: pointer;
-  } 
+}
 
 .logo-container img {
-   width: 120px; 
-   position: absolute; 
-   top: 10 px;
+    width: 120px;
+    position: absolute;
+    top: 10 px;
+    border-radius: 30px;
 }
 
-.logo-footer img{
-   width: 170px; 
-   height: auto;
-   margin-top: 10px;
-   margin-bottom: 10px;
+.logo-footer img {
+    width: 170px;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 30px;
 }
 
-.footer-menu{
+.footer-menu {
     text-align: left;
 }
 
-.footer-menu-buttons{
-    color : white !important;
+.footer-menu-buttons {
+    color: white !important;
     border: none;
     padding: 10px 20px;
-    text-decoration: none;    
+    text-decoration: none;
 }
 
 .footer-menu ul li {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     color: white;
 }
 
@@ -87,14 +102,15 @@ ul {
     list-style-type: none;
 }
 
-.header-info span{
+.header-info span {
     padding: 170px;
 }
-.header-social-icons span{
+
+.header-social-icons span {
     margin-left: 10px;
 }
 
-.percent-tax-rate-box{
+.percent-tax-rate-box {
     background-color: rgb(176, 212, 159);
     margin-left: 300px;
     margin-right: 300px;
@@ -104,20 +120,25 @@ ul {
     padding-bottom: 15px;
 }
 
-.percent-tax-rate-images img{
-  width: 240px;
-  padding: 15px;
-  margin-left: 20px;
+.percent-tax-rate-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.percent-tax-rate-title{
+.percent-tax-rate-images img {
+    width: 240px;
+    padding: 15px;
+    margin-left: 20px;
+}
+
+.percent-tax-rate-title {
     text-align: center;
     padding: 20px;
     font-size: 35px;
 }
 
-
-.KRS-info{
+.KRS-info {
     background-color: rgb(130, 78, 78);
     color: white;
     text-align: center;
@@ -127,7 +148,70 @@ ul {
     margin-right: 300px;
 }
 
-.container{
-    display: grid;
-    grid-template-rows: auto;
+.stats-container {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(176, 212, 159);
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 70px;
+    align-items: center;
+    border-radius: 10px;
+    padding-bottom: 15px;
+}
+
+.stats-wrapper {
+    border-radius: 20px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 46px 20px 0;
+}
+
+@media (max-width: 991px) {
+    .stats-wrapper {
+        max-width: 100%;
+    }
+}
+
+.stats-row {
+    gap: 20px;
+    display: flex;
+    padding: 40px 20px 0;
+}
+
+@media (max-width: 991px) {
+    .stats-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+}
+
+.stats-item {
+    border-radius: 20px;
+    background-color: var(--1, #7fc160);
+    display: flex;
+    flex-direction: column;
+    color: var(--Text-1, #fff);
+    text-align: center;
+    width: 100%;
+    padding: 30px 0;
+
+}
+
+@media (max-width: 991px) {
+    .stats-item {
+        margin-top: 40px;
+    }
+}
+
+.stats-value {
+    margin-top: 30px;
+    font: 900 40px Inter, sans-serif;
+}
+
+.stats-label {
+    margin-top: 15px;
+    font: 300 30px Inter, sans-serif;
 }
