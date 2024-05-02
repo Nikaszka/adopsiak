@@ -6,49 +6,15 @@ body {
     margin: 0;
     padding: 0;
 }
-
-header {
-    padding: 30px;
-    background-color: rgb(94, 169, 59);
-    color: white;
-
-    display: flex;
-    justify-content: space-between;
-}
-
-nav a+a {
-    margin-left: 1rem;
-}
-
-nav {
-    display: flex;
-    justify-content: flex-end;
-    background-color: white;
-    padding: 10px;
-    border-bottom: 2px solid rgba(126, 121, 121, 0.5);
-    border-left: 2px solid rgba(126, 121, 121, 0.5);
-    border-right: 2px solid rgba(126, 121, 121, 0.5);
-    /* box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);  */
-}
-
 main {
-    flex: 1;
+    /* flex: 1; */
+    display: grid;
     background-color: white;
     margin-bottom: 50px;
     margin-top: 50px;
+    /* padding-left: 35vh;
+    padding-right: 35vh; */
 }
-
-footer {
-    background-color: rgb(94, 169, 59);
-    display: flex;
-    align-items: center;
-}
-
-.column {
-    flex: 1;
-    text-align: center;
-}
-
 .container {
     display: grid;
     grid-template-rows: auto;
@@ -58,7 +24,7 @@ footer {
     background-color: white;
     color: black;
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     margin-right: 80px;
     border-radius: 5px;
     text-decoration: none;
@@ -66,87 +32,12 @@ footer {
     cursor: pointer;
 }
 
-.logo-container img {
-    width: 120px;
-    position: absolute;
-    top: 10 px;
-    border-radius: 30px;
-}
-
-.logo-footer img {
-    width: 170px;
-    height: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 30px;
-}
-
-.footer-menu {
-    text-align: left;
-}
-
-.footer-menu-buttons {
-    color: white !important;
-    border: none;
-    padding: 10px 20px;
-    text-decoration: none;
-}
-
-.footer-menu ul li {
-    margin-bottom: 10px;
-    color: white;
-}
-
 ul {
     margin-top: 10px;
     list-style-type: none;
 }
 
-.header-info span {
-    padding: 170px;
-}
 
-.header-social-icons span {
-    margin-left: 10px;
-}
-
-.percent-tax-rate-box {
-    background-color: rgb(176, 212, 159);
-    margin-left: 300px;
-    margin-right: 300px;
-    /* margin-top: 70px; */
-    align-items: center;
-    border-radius: 10px;
-    padding-bottom: 15px;
-}
-
-.percent-tax-rate-images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.percent-tax-rate-images img {
-    width: 240px;
-    padding: 15px;
-    margin-left: 20px;
-}
-
-.percent-tax-rate-title {
-    text-align: center;
-    padding: 20px;
-    font-size: 35px;
-}
-
-.KRS-info {
-    background-color: rgb(130, 78, 78);
-    color: white;
-    text-align: center;
-    font-size: 25px;
-    border-radius: 10px;
-    margin-left: 300px;
-    margin-right: 300px;
-}
 
 .stats-container {
     display: flex;
@@ -158,6 +49,12 @@ ul {
     align-items: center;
     border-radius: 10px;
     padding-bottom: 15px;
+}
+@media (max-width: 991px) {
+    .stats-container {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }
 
 .stats-wrapper {
@@ -173,6 +70,11 @@ ul {
         max-width: 100%;
     }
 }
+@media screen and (max-width: 768px) {
+    body {
+      overflow-x: hidden;
+    }
+  }
 
 .stats-row {
     gap: 20px;

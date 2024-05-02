@@ -100,14 +100,15 @@ export default {
 @media (max-width: 991px) {
   .section-title {
     max-width: 100%;
-    font-size: 40px;
+    font-size: 30px;
+    margin-left: 0px;
+    align-self: center;
   }
 }
 
 .animal-grid {
   margin-top: 39px;
   width: 100%;
-  padding: 0 20px;
   display: flex;
   gap: 20px;
 }
@@ -117,7 +118,13 @@ export default {
     max-width: 100%;
     flex-direction: column;
     align-items: stretch;
+    margin-left: 0px;
+    margin-right: 0px;
     gap: 0;
+  }
+  .animal-adoption {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 
@@ -126,12 +133,14 @@ export default {
   flex-direction: column;
   line-height: normal;
   width: 25%;
-  margin-left: 0;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 @media (max-width: 991px) {
   .animal-column {
     width: 100%;
+
   }
 }
 
@@ -153,6 +162,7 @@ export default {
 @media (max-width: 991px) {
   .animal-card {
     margin-top: 40px;
+    
   }
 }
 
@@ -234,6 +244,7 @@ export default {
 @media (max-width: 991px) {
   .more-animals-btn {
     padding: 0 20px;
+    font-size: 20px;
   }
 }
 
@@ -251,7 +262,9 @@ export default {
   .divider-container {
     max-width: 100%;
     margin-top: 40px;
+    
   }
+
 }
 
 .divider {
@@ -265,5 +278,74 @@ export default {
   .divider {
     max-width: 100%;
   }
+}
+
+.percent-tax-rate-box {
+    background-color: rgb(176, 212, 159);
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-bottom: 30px;
+    align-items: center;
+    border-radius: 10px;
+    padding-bottom: 15px;
+}
+
+.percent-tax-rate-images {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.percent-tax-rate-images img {
+    width: 240px;
+    padding: 15px;
+    /* margin-left: 20px; */
+}
+
+.percent-tax-rate-title {
+    text-align: center;
+    padding: 20px;
+    font-size: 35px;
+}
+
+.KRS-info {
+    background-color: rgb(130, 78, 78);
+    color: white;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 10px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+@media (max-width: 1200px) {
+  .percent-tax-rate-box {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+  .percent-tax-rate-images img {
+      width: 100px;
+      padding: 5px;
+      margin-left: 5px;
+  }
+
+  .percent-tax-rate-title {
+    text-align: center;
+    padding: 20px;
+    font-size: 15px;
+}
+.percent-tax-rate-images {
+  justify-content: center;
+  }
+
+  .KRS-info {
+    background-color: rgb(130, 78, 78);
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-left: 70px;
+    margin-right: 70px;
+}
 }
 </style>

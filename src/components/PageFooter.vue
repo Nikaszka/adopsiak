@@ -1,9 +1,12 @@
 <template>
 <footer>
-  <div class="column logo-footer">
-    <router-link to="/">
-      <img src="/kot_pies.jpg" alt="Logo">
-    </router-link>
+  <div class="column">
+    <div class = "logo-footer">
+      <router-link to="/">
+        <img src="/kot_pies.jpg" alt="Logo">
+      </router-link>
+    </div>
+    
   </div>
   <div class ="column">
     <div class ="footer-menu">
@@ -30,3 +33,59 @@
   </div>
 </footer>
 </template>
+
+<style>
+  footer {
+    background-color: rgb(94, 169, 59);
+    display: flex;
+    align-items: center;
+  }
+
+  .column {
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .logo-footer img {
+    width: 170px;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+  }
+
+  .footer-menu {
+    text-align: left;
+  }
+
+  .footer-menu-buttons {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-menu ul li {
+    margin-bottom: 10px;
+    color: white;
+}
+
+  @media screen and (max-width: 768px) {
+  .column{
+      padding: 0;
+      
+  }
+  .footer-menu-buttons {
+    color: white !important;
+    border: none;
+    font-size: 10px;
+
+  }
+  .logo-footer img {
+    width: 100px;
+  }
+  .footer-menu ul li {
+    font-size: 10px;
+}
+
+}
+</style>
