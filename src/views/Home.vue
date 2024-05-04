@@ -162,7 +162,7 @@ export default {
 @media (max-width: 991px) {
   .animal-card {
     margin-top: 40px;
-    
+    width: 70%;
   }
 }
 
@@ -288,6 +288,7 @@ export default {
     align-items: center;
     border-radius: 10px;
     padding-bottom: 15px;
+    text-align: center;
 }
 
 .percent-tax-rate-images {
@@ -320,11 +321,12 @@ export default {
 
 @media (max-width: 1200px) {
   .percent-tax-rate-box {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
 }
   .percent-tax-rate-images img {
-      width: 100px;
+      width: 120px;
       padding: 5px;
       margin-left: 5px;
   }
@@ -332,20 +334,24 @@ export default {
   .percent-tax-rate-title {
     text-align: center;
     padding: 20px;
-    font-size: 15px;
-}
-.percent-tax-rate-images {
-  justify-content: center;
+    font-size: 20px;
+  }
+  .percent-tax-rate-images {
+    justify-content: center;
   }
 
   .KRS-info {
     background-color: rgb(130, 78, 78);
     color: white;
     text-align: center;
-    font-size: 15px;
+    font-size: 20px;
     border-radius: 10px;
     margin-left: 70px;
     margin-right: 70px;
 }
 }
+@media (max-width: 1200px) {
+  .percent-tax-rate-images img {
+      width: 90px;
+  }}
 </style>

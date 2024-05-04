@@ -60,7 +60,7 @@ header {
 
 @media screen and (max-width: 991px) {
   header {
-    font-size: 10px;
+    font-size: 13px;
 }
   .header-info {
     margin-left: 14vh;
