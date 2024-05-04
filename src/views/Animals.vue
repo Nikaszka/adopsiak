@@ -1,4 +1,26 @@
 <template>
+  <div class = "filter-box">
+    <div class = "filter-buttons-box">
+      <button class = "animal-btn-filter"
+        :class="{ 'selected': selectedAnimal === 'pies' }"
+        @click="selectAnimal('pies')">pies</button>
+      <button class = "animal-btn-filter"
+        :class="{ 'selected': selectedAnimal === 'kot' }"
+        @click="selectAnimal('kot')">kot</button>
+      <button class = "gender-btn-filter" @click="toggleGenderOptions">płeć
+        <div class="arrow-down"></div>
+        <ul class="gender-options" v-show="showGenderOptions">
+          <li @click="selectGender('samica')"
+          :class="{ 'selectedGender': selectedGender === 'samica' }"
+          >Samica</li>
+          <li @click="selectGender('samiec')"
+          :class="{ 'selectedGender': selectedGender === 'samiec' }"
+          >Samiec</li>
+        </ul>
+      </button>  
+    </div>
+    <button class = "find-btn" @click="search">szukaj</button>
+  </div>
     <div class="animal-adoption">
     <div class="animal-grid">
       <div v-for="(animal, index) in displayedAnimals" :key="index" class="animal-column">
@@ -22,7 +44,6 @@
         </router-link>
       </div>
     </div>
-    <!-- <router-link to="/animals" class="more-animals-btn">Więcej zwierzaków</router-link> -->
     <button @click="showMoreAnimals" v-if="!allAnimalsDisplayed && displayedAnimals.length < animals.length"  class="more-animals-btn" >Więcej zwierząt</button>
   </div>
 </template>
@@ -32,29 +53,33 @@ export default {
   data() {
     return {
       animals: [
-        { name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg" },
-        { name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png" },
-        { name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg" },
-        { name: "Śnieżka", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg" },
-        { name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg" },
-        { name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png" },
-        { name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg" },
-        { name: "Śnieżka", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg" },
-        { name: "Lila", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg" },
-        { name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png" },
-        { name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg" },
-        { name: "Śnieżka", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg" },
-        { name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg" },
-        { name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png" },
-        { name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg" },
-        { name: "Azor", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg" },
-        { name: "Azor", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg" }
+        { name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg", animal: "pies"},
+        { name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png", animal: "kot" },
+        { name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg", animal: "pies" },
+        { name: "Śnieżka", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg", animal: "pies" },
+        { name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg", animal: "pies"},
+        { name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png", animal: "kot" },
+        { name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg", animal: "pies" },
+        { name: "Śnieżka", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg", animal: "pies" },
+        { name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg", animal: "pies"},
+        { name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png", animal: "kot" },
+        { name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg", animal: "pies" },
+        { name: "Śnieżka", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg", animal: "pies" },
+        { name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg", animal: "pies"},
+        { name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png", animal: "kot" },
+        { name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg", animal: "pies" },
+        { name: "Śnieżka", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg", animal: "pies" },
+        { name: "Azor", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg", animal: "pies" }
         
       ],
       displayedAnimals: [],
       animalsPerPage: 8,
       startIndex: 0, 
-      allAnimalsDisplayed: false 
+      allAnimalsDisplayed: false,
+      selectedAnimal: null,
+      filteredAnimals: [],
+      showGenderOptions: false,
+      selectedGender: null
     };
   },
   created() {
@@ -62,7 +87,11 @@ export default {
   },
   methods: {
     updateDisplayedAnimals() {
-        this.displayedAnimals = this.animals.slice(0, this.startIndex + this.animalsPerPage);
+      if (this.selectedAnimal) {
+      this.displayedAnimals = this.animals.filter(animal => animal.animal === this.selectedAnimal).slice(0, this.startIndex + this.animalsPerPage);
+      } else {
+      this.displayedAnimals = this.animals.slice(0, this.startIndex + this.animalsPerPage);
+      }
     },
     showMoreAnimals() {
       this.startIndex += this.animalsPerPage;
@@ -71,6 +100,29 @@ export default {
       if ((this.startIndex + this.animalsPerPage) >= this.animals.length) {
         this.allAnimalsDisplayed = true;
       }
+    },
+      selectAnimal(animal) {
+      this.selectedAnimal = animal;
+    },
+    search() {  
+    const genderFilter = this.selectedGender !== null ? { gender: this.selectedGender } : {};
+    const animalFilter = this.selectedAnimal !== null ? { animal: this.selectedAnimal } : {};
+    const filters = { ...genderFilter, ...animalFilter };
+
+    if (Object.keys(filters).length === 0) {
+      this.updateDisplayedAnimals();
+    } else {
+      this.filteredAnimals = this.animals.filter(animal => {
+        return Object.entries(filters).every(([key, value]) => animal[key] === value);
+      });
+      this.displayedAnimals = this.filteredAnimals;
+    }
+    },
+    toggleGenderOptions() {
+      this.showGenderOptions = !this.showGenderOptions;
+    },
+    selectGender(gender) {
+      this.selectedGender = gender;
     }
   }
 };  
@@ -219,5 +271,122 @@ export default {
   border: none;
   cursor: pointer;
   text-decoration: none;
+}
+.find-btn{
+  border-radius: 50%;
+  background-color: #703f11;
+  align-self: center;
+  margin-top: 40px;
+  color: #fff;
+  text-align: center;
+  padding: 17px 28px 10px;
+  font: italic 400 32px Inter, sans-serif;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: auto;
+}
+.filter-box{
+  display: flex;
+  margin-left: 300px;
+  margin-right: 300px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+.filter-box button{
+  margin-right: 40px;
+}
+@media (max-width: 1500px) {
+  .filter-box{
+  margin-left: auto;
+  margin-right: auto;
+  }
+  .filter-box button{
+  margin-right: auto;
+  }
+}
+.animal-btn-filter{
+  border-radius: 50%;
+  background-color: white;
+  align-self: center;
+  margin-top: 40px;
+  color: rgb(94, 169, 59);
+  text-align: center;
+  padding: 17px 28px 10px;
+  font: italic 400 32px Inter, sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid rgb(94, 169, 59);  
+}
+.gender-btn-filter{
+  border-radius: 50%;
+  background-color: white;
+  align-self: center;
+  margin-top: 40px;
+  color: rgb(94, 169, 59);
+  text-align: center;
+  padding: 17px 28px 10px;
+  font: italic 400 32px Inter, sans-serif;
+  cursor: pointer;
+  text-decoration: none; 
+  border: 1px solid rgb(94, 169, 59);
+  position: relative;
+  display: inline-block;
+}
+.arrow-down {
+  position: absolute; 
+  top: 50%; 
+  right: 10px; 
+  transform: translateY(-50%); 
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent; 
+  border-right: 5px solid transparent; 
+  border-top: 5px solid rgb(94, 169, 59);
+}
+.filter-buttons-box{
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+}
+@media (max-width: 1100px) {
+  .gender-btn-filter{
+    padding: 8px 17px 8px;
+    font: italic 400 16px Inter, sans-serif;
+  }
+  .animal-btn-filter{
+    padding: 8px 17px 8px;
+    font: italic 400 16px Inter, sans-serif;
+  }
+  .find-btn{
+    padding: 8px 17px 8px;
+    font: italic 400 16px Inter, sans-serif;
+  }
+}
+.selectedGender,
+.selected {
+  background-color: rgb(227, 227, 129);
+}
+.gender-options {
+  position: absolute;
+  top: calc(100% + 5px);
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border: 1px solid rgb(94, 169, 59);
+  border-radius: 7px;
+}
+
+.gender-options li {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.gender-options li:hover {
+  background-color: rgb(245, 245, 245);
 }
 </style>
