@@ -74,9 +74,6 @@ export default {
 </script>
 
 <style scoped>
-/* ************************************ */
-/* GŁÓWNA - ZWIERZAKI DO ADOPCJI */
-/* ************************************ */
 
 .router-link-active {
   text-decoration: none;
@@ -281,42 +278,41 @@ export default {
 }
 
 .percent-tax-rate-box {
-    background-color: rgb(176, 212, 159);
-    margin-left: 300px;
-    margin-right: 300px;
-    margin-bottom: 30px;
-    align-items: center;
-    border-radius: 10px;
-    padding-bottom: 15px;
-    text-align: center;
+  background-color: rgb(176, 212, 159);
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-bottom: 30px;
+  align-items: center;
+  border-radius: 10px;
+  padding-bottom: 15px;
+  text-align: center;
 }
 
 .percent-tax-rate-images {
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .percent-tax-rate-images img {
-    width: 240px;
-    padding: 15px;
-    /* margin-left: 20px; */
+  width: 240px;
+  padding: 15px;
 }
 
 .percent-tax-rate-title {
-    text-align: center;
-    padding: 20px;
-    font-size: 35px;
+  text-align: center;
+  padding: 20px;
+  font-size: 35px;
 }
 
 .KRS-info {
-    background-color: rgb(130, 78, 78);
-    color: white;
-    text-align: center;
-    font-size: 25px;
-    border-radius: 10px;
-    margin-left: 300px;
-    margin-right: 300px;
+  background-color: rgb(130, 78, 78);
+  color: white;
+  text-align: center;
+  font-size: 25px;
+  border-radius: 10px;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
 @media (max-width: 1200px) {
@@ -324,13 +320,12 @@ export default {
     margin-left: auto;
     margin-right: auto;
     width: 70%;
-}
-  .percent-tax-rate-images img {
-      width: 120px;
-      padding: 5px;
-      margin-left: 5px;
   }
-
+  .percent-tax-rate-images img {
+    width: 120px;
+    padding: 5px;
+    margin-left: 5px;
+  }
   .percent-tax-rate-title {
     text-align: center;
     padding: 20px;
@@ -339,7 +334,6 @@ export default {
   .percent-tax-rate-images {
     justify-content: center;
   }
-
   .KRS-info {
     background-color: rgb(130, 78, 78);
     color: white;
@@ -348,10 +342,9 @@ export default {
     border-radius: 10px;
     margin-left: 70px;
     margin-right: 70px;
+  }
+  .image-item {
+    width: 90px;
+  }
 }
-}
-@media (max-width: 1200px) {
-  .percent-tax-rate-images img {
-      width: 90px;
-  }}
 </style>

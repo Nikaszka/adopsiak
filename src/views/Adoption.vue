@@ -20,6 +20,22 @@
         </div>
       </div>
     </div>
+
+    <div class="section-container">
+      <div class="adoption-container">
+        <div class="step-content">
+          <div class="step-image" >
+            <img src="/stroller.png" alt="Wypełnij formularz adopcyjny" class="step-img" />
+          </div>
+          <div class="step-description">
+            <h2 class="adoption-title">Adopcja młodych zwierząt</h2>
+            <p class="step-text">
+        Wyznacz termin odbioru nowego przyjaciela i przygotuj się na radosne powitanie w domu! Zapewniamy Cię, że to początek niezwykłej przygody pełnej miłości i przyjaźni.
+      </p>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <div class="adoption-refusal">
       <h2 class="mission-statement">
@@ -36,6 +52,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
