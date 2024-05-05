@@ -102,7 +102,14 @@ export default {
       }
     },
       selectAnimal(animal) {
-      this.selectedAnimal = animal;
+        // Jeśli kliknięty przycisk jest już zaznaczony, odznacz go
+        if (this.selectedAnimal === animal) {
+          this.selectedAnimal = null;
+        } else {
+          // W przeciwnym razie zaznacz nowy przycisk i zaktualizuj wyświetlane zwierzęta
+          this.selectedAnimal = animal;
+          this.updateDisplayedAnimals();
+        }
     },
     search() {  
     const genderFilter = this.selectedGender !== null ? { gender: this.selectedGender } : {};
@@ -122,7 +129,14 @@ export default {
       this.showGenderOptions = !this.showGenderOptions;
     },
     selectGender(gender) {
-      this.selectedGender = gender;
+      // Jeśli kliknięta płeć jest już zaznaczona, odznacz ją
+      if (this.selectedGender === gender) {
+        this.selectedGender = null;
+      } else {
+        // W przeciwnym razie zaznacz nową płeć i wywołaj wyszukiwanie
+        this.selectedGender = gender;
+        this.search();
+      }
     }
   }
 };  
