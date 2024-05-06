@@ -92,7 +92,7 @@
       <div class="info-item">
         <font-awesome-icon icon="clock" />
         <div class="info-text">
-           poniedziałek - piątek<br />
+          poniedziałek - piątek<br />
           9:00 - 18:00
         </div>
       </div>
