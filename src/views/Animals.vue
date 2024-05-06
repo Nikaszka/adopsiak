@@ -3,10 +3,10 @@
     <div class = "filter-buttons-box">
       <button class = "animal-btn-filter"
         :class="{ 'selected': selectedAnimal === 'pies' }"
-        @click="selectAnimal('pies')">pies</button>
+        @click="selectAnimal('pies')"><font-awesome-icon icon="dog"/>pies</button>
       <button class = "animal-btn-filter"
         :class="{ 'selected': selectedAnimal === 'kot' }"
-        @click="selectAnimal('kot')">kot</button>
+        @click="selectAnimal('kot')" ><font-awesome-icon icon="cat"/>kot</button>
       <button class = "gender-btn-filter" @click="toggleGenderOptions">płeć
         <div class="arrow-down"></div>
         <ul class="gender-options" v-show="showGenderOptions">
@@ -24,7 +24,6 @@
     <div class="animal-adoption">
     <div class="animal-grid">
       <div v-for="(animal, index) in displayedAnimals" :key="index" class="animal-column">
-        <!-- <router-link to="'/animal/' + animal.id" class="router-link-active"> -->
           <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id }}" class="router-link-active">
           <div class="animal-card">
             <img :src="animal.image" :alt="animal.name" class="animal-image" />
