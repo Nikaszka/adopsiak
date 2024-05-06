@@ -5,6 +5,7 @@ import Animals from './views/Animals.vue'
 import Contact from './views/Contact.vue'
 import Support from './views/Support.vue'
 import Adoption from './views/Adoption.vue'
+import SelectedAnimal from './views/SelectedAnimal.vue'
 
 export default createRouter({
     history: createWebHistory(),
@@ -32,6 +33,12 @@ export default createRouter({
       {
         path: '/Contact',
         component: Contact
-      }, 
+      },
+      {
+        path: '/animal/:id',
+        name: 'SelectedAnimal',
+        component: SelectedAnimal,
+        props: true
+      }
     ]
 })
