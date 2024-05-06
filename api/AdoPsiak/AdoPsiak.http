@@ -1,0 +1,6 @@
+@AdoPsiak_HostAddress = http://localhost:5104
+
+GET {{AdoPsiak_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
