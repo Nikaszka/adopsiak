@@ -6,7 +6,22 @@
         <img :src="animals[index].image" :alt="animals[index].name" class="animal-image" />
       </div>
       <div class = "animal-desciption">
-        <p>{{ description }}</p>
+        <div class = "animal-breed">
+          <font-awesome-icon icon="paw" />
+          <input type="text" id="myInput" :value="animals[index].breed" class="breed-name"></input> 
+        </div>
+        <div class = "animal-gender">
+          <font-awesome-icon icon="venus-mars" />
+          <input type="text" id="myInput" :value="animals[index].gender + ', ' + animals[index].age" class="gender-age"></input>
+        </div>
+        <div class = "animal-location">
+          <font-awesome-icon icon="location-dot" />
+          <input type="text" id="myInput" :value="animals[index].location" class="location-address"></input>
+        </div>
+        <!-- <input type="text" id="myInput" :value="description" class="description-input"> -->
+        <textarea id="myTextarea"  rows="9" cols="100" class="text-area">
+        {{description}}
+        </textarea>
       </div>
     </div>
   </div>
@@ -28,6 +43,7 @@
 .animal-data{
   display: flex;
   margin: 100px;
+  text-align: justify;
 }
 @media (max-width: 991px) {
   .animal-data {
@@ -36,7 +52,7 @@
 
 .animal-photo{
   /* flex: 1; */
-  margin: 30px;
+  margin-right: 30px;
 }
 .animal-photo img{
   width: 600px;
@@ -44,6 +60,35 @@
 }
 
 .animal-description{
-  flex:1;
+  /* flex:1; */
+}
+.animal-location,
+.animal-gender,
+.animal-breed{
+  display: flex;
+  white-space: nowrap;
+  padding: 10px;
+}
+.animal-gender{
+  gap: 20px;
+}
+.animal-breed{
+  gap: 25px;
+}
+.animal-location{
+  gap: 30px;
+}
+.animal-location input,
+.animal-gender input,
+.animal-breed input{
+  border: none;
+  font: italic 400 20px Inter, sans-serif;
+}
+.text-area{
+  resize: none;
+  border: none;
+  text-align: justify;
+  font: italic 400 20px Inter, sans-serif;
+  line-height: 1.8;
 }
 </style>
