@@ -17,16 +17,6 @@
           <span><font-awesome-icon :icon="['fab', 'facebook']"/></span>
     </div>
   </div>
-        <!-- <div>
-
-        </div>
-        
-
-
-        <div class = "header-social-icons">
-          <span><font-awesome-icon :icon="['fab', 'instagram']" /></span>
-          <span><font-awesome-icon :icon="['fab', 'facebook']"/></span>
-        </div> -->
 </header>
 </template>
 
