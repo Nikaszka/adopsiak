@@ -504,7 +504,7 @@ export default {
   aspect-ratio: 0.97;
   width: 36px;
 }
-*/
+
 .more-animals-btn {
   border-radius: 50%;
   background-color: #7fc160;
