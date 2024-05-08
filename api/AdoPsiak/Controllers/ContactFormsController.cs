@@ -39,7 +39,7 @@ namespace AdoPsiak.Controllers
         }
 
         [Authorize]
-        [HttpGet("getall")]
+        [HttpGet]
         public async Task<IActionResult> GetAllContactForms()
         {
             var forms = await _context.ContactForms.ToListAsync();

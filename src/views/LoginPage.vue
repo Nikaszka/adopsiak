@@ -37,16 +37,18 @@
       };
     
     try {
-        const response = await fetch('https://localhost:7241/login?useCookies=true&useSessionCookies=true', {
+        const response = await fetch('https://localhost:7241/login?useCookies=true&useSessionCookies=false', {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(loginData)
+          body: JSON.stringify(formData),
         });
     
         if (response.ok) {
           console.log('Login successful!'); // Tutaj możesz obsłużyć sukces logowania
+          
           // Na przykład przekierować użytkownika na inną stronę
         } else {
           console.error('Login failed:', response.statusText);

@@ -39,6 +39,7 @@ namespace AdoPsiak.Controllers
                 ZipCode = formDto.Address.ZipCode,
                 ApartmentNumber = formDto.Address.ApartmentNumber,
                 AboutResponsibility = formDto.Answer.AboutResponsibility,              
+                SendingDate = DateTime.Now,
             };
             _context.AdoptionForms.Add(form);
             await _context.SaveChangesAsync();

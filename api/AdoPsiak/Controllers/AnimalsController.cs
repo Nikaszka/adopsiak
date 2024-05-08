@@ -1,6 +1,7 @@
 ﻿using AdoPsiak.Data;
 using AdoPsiak.Dto;
 using AdoPsiak.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mime;
@@ -26,6 +27,7 @@ namespace AdoPsiak.Controllers
             _context = context;
         }
 
+        //[Authorize]
         [HttpPost("add")]
         public async Task<IActionResult> AddAnimal([FromBody] NewAnimalDto animalDto)
         {
@@ -37,6 +39,14 @@ namespace AdoPsiak.Controllers
                 Localization = animalDto.Localization,
                 Genus = animalDto.Genus,
                 Gender = animalDto.Gender,
+                ChildFriendly = animalDto.ChildFriendly,
+                CatFriendly = animalDto.CatFriendly,
+                DogFriendly = animalDto.DogFriendly,
+                LikesToPlay = animalDto.LikesToPlay,
+                LikesToCuddle = animalDto.LikesToCuddle,
+                DoesntLikeShelter = animalDto.DoesntLikeShelter,
+                Description = animalDto.Description,
+                Status = animalDto.Status,
             };
             _context.Animals.Add(animal);
             await _context.SaveChangesAsync();
@@ -79,9 +89,39 @@ namespace AdoPsiak.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAnimals()
+        public async Task<IActionResult> GetAllAnimals(int page, int pageSize, string? genus, string? gender)
         {
-            var animals = await _context.Animals.ToListAsync();
+            var query = _context.Animals.AsQueryable();
+
+            if(genus is not null)
+            {
+                if(genus == "dog")
+                {
+                    query = query.Where(a => a.Genus == Genus.Dog);
+                }
+                if(genus == "cat")
+                {
+                    query = query.Where(a => a.Genus == Genus.Cat);
+                }
+            }
+
+            if(gender is not null)
+            {
+                if(gender == "male")
+                {
+                    query = query.Where(a => a.Gender == Gender.Male);
+                }
+                if(gender == "female")
+                {
+                    query = query.Where(a => a.Gender == Gender.Female);
+                }
+            }
+
+
+            var animals = await query.OrderByDescending(a => a.Id)
+                .Skip((page-1)*pageSize)
+                .Take(pageSize)
+                .ToListAsync();
             return Ok(animals);
 
         }
@@ -133,6 +173,14 @@ namespace AdoPsiak.Controllers
             dbAnimal.Genus = updatedAnimal.Genus;
             dbAnimal.Gender = updatedAnimal.Gender;
             dbAnimal.Status = updatedAnimal.Status;
+            dbAnimal.Description = updatedAnimal.Description;
+            dbAnimal.CatFriendly = updatedAnimal.CatFriendly;
+            dbAnimal.DogFriendly = updatedAnimal.DogFriendly;
+            dbAnimal.ChildFriendly = updatedAnimal.ChildFriendly;
+            dbAnimal.LikesToCuddle = updatedAnimal.LikesToCuddle;
+            dbAnimal.LikesToPlay = updatedAnimal.LikesToPlay;
+            dbAnimal.DoesntLikeShelter = updatedAnimal.DoesntLikeShelter;
+
 
             await _context.SaveChangesAsync();
 

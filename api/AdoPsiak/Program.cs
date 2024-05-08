@@ -25,6 +25,16 @@ builder.Services.AddAuthentication()
             context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
             return Task.CompletedTask;
         };
+        opts.Events.OnSignedIn = context =>
+        {
+            context.HttpContext.Response.Cookies.Append("X-User", context.HttpContext.User.Identity?.Name ?? "");
+            return Task.CompletedTask;
+        };
+        opts.Events.OnSigningOut = context =>
+        {
+            context.HttpContext.Response.Cookies.Delete("X-User");
+            return Task.CompletedTask;
+        }
     });
 
 builder.Services.AddIdentityCore<Admin>()
@@ -49,9 +59,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policyBuilder =>
     {
-        policyBuilder.WithOrigins("https://localhost:5173")
+        policyBuilder.WithOrigins("https://localhost:5173", "https://localhost:5174")
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 

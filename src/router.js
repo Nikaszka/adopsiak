@@ -9,6 +9,7 @@ import SelectedAnimal from './views/SelectedAnimal.vue'
 import AdoptionForm from './views/AdoptionForm.vue'
 import LoginPage from './views/LoginPage.vue'
 import AddAnimal from './views/AddAnimal.vue'
+import Admin from './views/Admin.vue'
 
 export default createRouter({
     history: createWebHistory(),
@@ -56,6 +57,10 @@ export default createRouter({
       {
         path: '/animal/new',
         component: AddAnimal,
+      },
+      {
+        path: '/admin',
+        component: Admin,
       },
     ]
 })

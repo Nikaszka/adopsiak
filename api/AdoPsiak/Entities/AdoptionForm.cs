@@ -17,9 +17,9 @@
         public required string AboutExperienceWithAnimals { get; set; }
         public required string AboutOtherAnimals { get; set; }
         public required string AboutResponsibility { get; set; }
-        public FormStatus FormStatus { get; set; }     //dla administratora
+        public FormStatus FormStatus { get; set; } = FormStatus.InProgress;   //dla administratora
+        public DateTime SendingDate { get; set; }
 
-        // + data złożenia wniosku
 
     }
 
