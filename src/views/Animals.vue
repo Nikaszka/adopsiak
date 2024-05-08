@@ -23,7 +23,7 @@
   </div>
     <div class="animal-adoption">
     <div class="animal-grid">
-      <div v-for="(animal, index) in displayedAnimals" :key="index" class="animal-column">
+      <!-- <div v-for="(animal, index) in displayedAnimals" :key="index" class="animal-column">
           <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id }}" class="router-link-active">
           <div class="animal-card">
             <img :src="animal.image" :alt="animal.name" class="animal-image" />
@@ -42,12 +42,209 @@
             </div>
           </div>
         </router-link>
+      </div> -->
+      <div v-for="animal in animals" :key="animal.id" class="animal-column">
+          <Animal :animal='animal'></Animal>
       </div>
+
     </div>
     <button @click="showMoreAnimals" v-if="!allAnimalsDisplayed && displayedAnimals.length < animals.length"  class="more-animals-btn" >Więcej zwierząt</button>
   </div>
 </template>
 
+
+<!-- <script>
+import Animal from '@/components/Animal.vue'
+import { reactive, onMounted, watch } from 'vue';
+
+export default {
+  setup() {
+    const animals = reactive([]);
+    const displayedAnimals = reactive([]);
+    const animalsPerPage = 8;
+    let startIndex = 0;
+    let allAnimalsDisplayed = false;
+    let selectedAnimal = null;
+    const filteredAnimals = reactive([]);
+    let showGenderOptions = false;
+    let selectedGender = null;
+
+    const fetchAnimals = async () => {
+      try {
+        const response = await fetch('https://localhost:7241/Animals?page=1&pageSize=16');
+        const data = await response.json();
+        animals.splice(0, animals.length, ...data);
+      } catch (error) {
+        console.error('Error fetching animals:', error);
+      }
+    };
+
+    onMounted(fetchAnimals);
+
+    const updateDisplayedAnimals = () => {
+      if (selectedAnimal) {
+        displayedAnimals.splice(0, displayedAnimals.length, ...animals.filter(animal => animal.animal === selectedAnimal).slice(0, startIndex + animalsPerPage));
+      } else {
+        displayedAnimals.splice(0, displayedAnimals.length, ...animals.slice(0, startIndex + animalsPerPage));
+      }
+    };
+
+    watch(() => selectedAnimal, updateDisplayedAnimals);
+
+    const showMoreAnimals = () => {
+      startIndex += animalsPerPage;
+      updateDisplayedAnimals();
+
+      if ((startIndex + animalsPerPage) >= animals.length) {
+        allAnimalsDisplayed = true;
+      }
+    };
+
+    const selectAnimal = (animal) => {
+      if (selectedAnimal === animal) {
+        selectedAnimal = null;
+      } else {
+        selectedAnimal = animal;
+        updateDisplayedAnimals();
+      }
+    };
+
+    const search = () => {
+      const genderFilter = selectedGender !== null ? { gender: selectedGender } : {};
+      const animalFilter = selectedAnimal !== null ? { animal: selectedAnimal } : {};
+      const filters = { ...genderFilter, ...animalFilter };
+
+      if (Object.keys(filters).length === 0) {
+        updateDisplayedAnimals();
+      } else {
+        filteredAnimals.splice(0, filteredAnimals.length, ...animals.filter(animal => {
+          return Object.entries(filters).every(([key, value]) => animal[key] === value);
+        }));
+        displayedAnimals.splice(0, displayedAnimals.length, ...filteredAnimals);
+      }
+    };
+
+    const toggleGenderOptions = () => {
+      showGenderOptions = !showGenderOptions;
+    };
+
+    const selectGender = (gender) => {
+      if (selectedGender === gender) {
+        selectedGender = null;
+      } else {
+        selectedGender = gender;
+        search();
+      }
+    };
+
+    return {
+      animals,
+      displayedAnimals,
+      animalsPerPage,
+      allAnimalsDisplayed,
+      selectedAnimal,
+      selectedGender,
+      showGenderOptions,
+      fetchAnimals,
+      updateDisplayedAnimals,
+      showMoreAnimals,
+      selectAnimal,
+      search,
+      toggleGenderOptions,
+      selectGender
+    };
+  }
+};
+</script> -->
+
+
+<script setup>
+//import z bazy
+import Animal from '../components/Animal.vue'
+import { reactive, onMounted } from 'vue';
+
+const animals = reactive([]);
+
+let currentPage = 1;
+
+const fetchAnimals = async () => {
+    try {
+        const response = await fetch(`https://localhost:7241/Animals?page=${currentPage}&pageSize=${animalsPerPage}`);
+        const data = await response.json();
+        
+        animals.push(...data);
+    } catch (error) {
+        console.error('Error fetching animals:', error);
+    }
+};
+
+onMounted(fetchAnimals); // Fetch animals when the component is mounted
+
+
+
+import { watch } from 'vue';
+
+const displayedAnimals = reactive([]);
+const animalsPerPage = 8;
+let allAnimalsDisplayed = false;
+let selectedAnimal = null;
+const filteredAnimals = reactive([]);
+let showGenderOptions = false;
+let selectedGender = null;
+
+// Metoda do wczytywania więcej zwierząt
+const showMoreAnimals = () => {
+  currentPage += 1;
+
+  fetchAnimals();
+};
+
+// Metoda do zaznaczania wybranego zwierzęcia
+const selectAnimal = (animal) => {
+  if (selectedAnimal === animal) {
+    selectedAnimal = null;
+  } else {
+    selectedAnimal = animal;
+    updateDisplayedAnimals();
+  }
+};
+
+// Metoda do filtrowania zwierząt
+const search = () => {
+  const genderFilter = selectedGender !== null ? { gender: selectedGender } : {};
+  const animalFilter = selectedAnimal !== null ? { animal: selectedAnimal } : {};
+  const filters = { ...genderFilter, ...animalFilter };
+
+  if (Object.keys(filters).length === 0) {
+    updateDisplayedAnimals();
+  } else {
+    filteredAnimals.splice(0, filteredAnimals.length, ...animals.filter(animal => {
+      return Object.entries(filters).every(([key, value]) => animal[key] === value);
+    }));
+    displayedAnimals.splice(0, displayedAnimals.length, ...filteredAnimals);
+  }
+};
+
+// Metoda do przełączania opcji płci
+const toggleGenderOptions = () => {
+  showGenderOptions = !showGenderOptions;
+};
+
+// Metoda do zaznaczania wybranej płci
+const selectGender = (gender) => {
+  if (selectedGender === gender) {
+    selectedGender = null;
+  } else {
+    selectedGender = gender;
+    search();
+  }
+};
+</script>
+
+
+
+
+<!-- 
 <script>
 export default {
   data() {
@@ -140,7 +337,9 @@ export default {
     }
   }
 };  
-</script>
+</script> -->
+
+
 
 <style scoped>
 .router-link-active {
@@ -191,7 +390,7 @@ export default {
     width: 100%;
   }
 }
-
+/*
 .animal-card {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   background-color: #fdfafa;
@@ -272,7 +471,7 @@ export default {
   aspect-ratio: 0.97;
   width: 36px;
 }
-
+*/
 .more-animals-btn {
   border-radius: 50%;
   background-color: #7fc160;
