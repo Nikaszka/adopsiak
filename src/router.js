@@ -7,6 +7,8 @@ import Support from './views/Support.vue'
 import Adoption from './views/Adoption.vue'
 import SelectedAnimal from './views/SelectedAnimal.vue'
 import AdoptionForm from './views/AdoptionForm.vue'
+import LoginPage from './views/LoginPage.vue'
+import AddAnimal from './views/AddAnimal.vue'
 
 export default createRouter({
     history: createWebHistory(),
@@ -46,6 +48,14 @@ export default createRouter({
         name: 'AdoptionForm',
         component: AdoptionForm,
         props: true
-      }
+      },
+      {
+        path: '/admin/login',
+        component: LoginPage,
+      },
+      {
+        path: '/animal/new',
+        component: AddAnimal,
+      },
     ]
 })

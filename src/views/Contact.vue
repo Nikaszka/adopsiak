@@ -115,17 +115,45 @@ export default {
   },
   methods: {
     submitForm() {
-      // Handle form submission logic here
-      console.log("Form submitted:", this.formData);
-      // Reset form fields after submission
-      this.formData = {
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-        message: "",
-      };
+  const url = "https://localhost:7241/ContactForms/add";
+  const formData = {
+    topic: this.formData.topic,
+    firstName: this.formData.firstName,
+    lastName: this.formData.lastName,
+    emailAddress: this.formData.email,
+    phoneNumber: this.formData.phone,
+    messageContent: this.formData.message
+  };
+
+  // Wykonaj żądanie HTTP POST
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
     },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Formularz został pomyślnie przesłany:', data);
+    // Zresetuj pola formularza po pomyślnym przesłaniu
+    this.formData = {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      message: ""
+    };
+  })
+  .catch(error => {
+    console.error('Wystąpił błąd podczas wysyłania formularza:', error);
+  });
+},
     openEmail() {
       window.location.href = "mailto:adopsiak@gmail.com";
     },
