@@ -210,7 +210,9 @@ const description = ref("Tutaj spotykasz Królewnę - roczną kicię o zielonych
 @media (max-width: 991px) {
   .title {
     font: italic 400 30px Inter, sans-serif;
-  }
+    margin: 10px;
+    text-align: center;
+}
 }
 
 .animal-data {
@@ -311,21 +313,19 @@ const description = ref("Tutaj spotykasz Królewnę - roczną kicię o zielonych
 @media (max-width: 900px) {
   .text-area {
     font: italic 400 15px Inter, sans-serif;
-    margin: 10px;
+    /* margin: 10px; */
   }
-
-  .animal-location input,
-  .animal-gender input,
-  .animal-breed input,
-  .animal-benefits input {
-    font: italic 400 13px Inter, sans-serif;
-  }
-
-  .animal-location,
-  .animal-gender,
-  .animal-breed,
-  .animal-benefits {
-    padding: 3px;
-  }
+.animal-location input,
+.animal-gender input,
+.animal-breed input,
+.animal-benefits input{
+  font: italic 400 13px Inter, sans-serif;
+}
+.animal-location,
+.animal-gender,
+.animal-breed,
+.animal-benefits{
+  padding: 3px;
+}
 }
 </style>
