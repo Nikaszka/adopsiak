@@ -8,7 +8,7 @@
       <div class = "animal-desciption">
         <div class = "animal-breed">
           <font-awesome-icon icon="paw" class="info-icon"/>
-          <input type="text" id="myInput" :value="animals[index].breed" class="breed-name"></input> 
+          <input type="text" id="myInput" :value="animals[index].breed" class="breed-name"></input>
         </div>
         <div class = "animal-gender">
           <font-awesome-icon icon="venus-mars" class="info-icon"/>
@@ -21,7 +21,7 @@
         <div class="other-benefits">
           <div class = "animal-benefits">
           <font-awesome-icon icon="heart" class="heart-icon"/>
-          <input type="text" id="myInput" value="Uwielbia pieszczoty"></input> 
+          <input type="text" id="myInput" value="Uwielbia pieszczoty"></input>
         </div>
         <div class = "animal-benefits">
           <font-awesome-icon icon="heart" class="heart-icon" />
@@ -30,8 +30,8 @@
         <div class = "animal-benefits">
           <font-awesome-icon icon="heart" class="heart-icon"/>
           <input type="text" id="myInput" value="Akceptuje inne zwierzęta"></input>
-        </div>      
-        </div>      
+        </div>
+        </div>
       </div>
 
     </div>
@@ -44,19 +44,16 @@
       <div class="animal-donation">
       <div class="animal-donation-title">Zaangażuj się w pomoc dla tego zwierzaka</div>
       <input type="text" placeholder="0,00 zł" class="donation-input">
-      <div><button class="donation-button">Wesprzyj finansowo</button></div> 
+      <div><button class="donation-button">Wesprzyj finansowo</button></div>
     </div>
-    
-      <router-link to="/animals" class="router-link-active">
-      <div>
-        <div class="animal-form-title">Przejdź do formularza Adopcji </div>
-        <font-awesome-icon :icon="['fas', 'pen']" class="pen-icon"/>
-      </div>
-      </router-link>
-           
-    
+  <a :href="'/animal/adoption-form/' + props.id" class="router-link-active">
+    <div>
+      <div class="animal-form-title">Przejdź do formularza Adopcji </div>
+      <font-awesome-icon :icon="['fas', 'pen']" class="pen-icon"/>
     </div>
- 
+  </a>
+</div>
+
   </div>
   
 
@@ -93,7 +90,7 @@
   justify-content: center;
   display: flex;
   background-color: rgb(94, 169, 59);
-  border-radius: 10px; 
+  border-radius: 10px;
   height: 100%;
   font: italic 400 25px Inter, sans-serif;
 }
@@ -177,7 +174,7 @@
 }
 }
 .animal-data{
-  display: flex; 
+  display: flex;
   text-align: justify;
 
 }
@@ -262,13 +259,13 @@
 }
 .animal-location input,
 .animal-gender input,
-.animal-breed input, 
+.animal-breed input,
 .animal-benefits input{
   font: italic 400 13px Inter, sans-serif;
 }
 .animal-location,
 .animal-gender,
-.animal-breed, 
+.animal-breed,
 .animal-benefits{
   padding: 3px;
 }
