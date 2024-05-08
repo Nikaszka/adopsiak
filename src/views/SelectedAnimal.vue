@@ -174,6 +174,8 @@
 @media (max-width: 991px) {
   .title{
     font: italic 400 30px Inter, sans-serif;
+    margin: 10px;
+    text-align: center;
 }
 }
 .animal-data{
@@ -258,8 +260,8 @@
 @media (max-width: 900px) {
   .text-area{
     font: italic 400 15px Inter, sans-serif;
-    margin: 10px;
-}
+    /* margin: 10px; */
+  }
 .animal-location input,
 .animal-gender input,
 .animal-breed input, 

@@ -25,8 +25,8 @@
     <div class="animal-grid">
       <div v-for="(animal, index) in displayedAnimals" :key="index" class="animal-column">
           <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id }}" class="router-link-active">
-          <div class="animal-card">
-            <img :src="animal.image" :alt="animal.name" class="animal-image" />
+          <img :src="animal.image" :alt="animal.name" class="animal-image" /></router-link>
+          <div class="animal-card">           
             <h3 class="animal-name">{{ animal.name }}</h3>
             <div class="animal-breed">
               <font-awesome-icon icon="paw" />
@@ -40,8 +40,12 @@
               <font-awesome-icon icon="location-dot" />
               <span class="location-address">{{ animal.location }}</span>
             </div>
+            <div class = "animal-editing">
+            <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id }}" class="editing-button">Edytuj</router-link> 
+            
           </div>
-        </router-link>
+          </div>
+        
       </div>
     </div>
     <button @click="showMoreAnimals" v-if="!allAnimalsDisplayed && displayedAnimals.length < animals.length"  class="more-animals-btn" >Więcej zwierząt</button>
@@ -53,7 +57,7 @@ export default {
   data() {
     return {
       animals: [
-      {id:0, name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg", animal: "pies"},
+    {id:0, name: "Gucio", breed: "Mieszaniec", gender: "samiec", age: "ok. 4 lata", location: "Kraków, ul. Pomorska", image: "/pies1.jpg", animal: "pies"},
     {id:1, name: "Aldona", breed: "Kot syjamski", gender: "samica", age: "5 lat", location: "Balice", image: "/kot_syjamski.png", animal: "kot" },
     {id:2, name: "Morał", breed: "Mieszaniec", gender: "samiec", age: "ok. 2 lata", location: "Kraków, Czyżyny", image: "/pies3.jpg", animal: "pies" },
     {id:3, name: "Śnieżka", breed: "Labrador", gender: "samica", age: "1 rok", location: "Bibice", image: "/labrador.jpg", animal: "pies" },
@@ -143,6 +147,14 @@ export default {
 </script>
 
 <style scoped>
+.animal-editing{
+  margin-top: 10px;
+  background-color: #7fc160;
+  margin-bottom: 0;
+}
+.editing-button{
+  text-decoration: none;
+}
 .router-link-active {
   text-decoration: none;
 }
@@ -198,7 +210,7 @@ export default {
   display: flex;
   width: 100%;
   flex-grow: 1;
-  padding-bottom: 9px;
+  /* padding-bottom: 9px; */
   flex-direction: column;
   font-size: 16px;
   color: #000;
