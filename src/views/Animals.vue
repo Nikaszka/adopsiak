@@ -42,7 +42,7 @@
             </div>
             <div class = "animal-editing">
             <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id }}" class="editing-button">Edytuj</router-link> 
-            
+            <button class="deleting-button">Usuń</button>
           </div>
           </div>
         
@@ -148,17 +148,31 @@ export default {
 
 <style scoped>
 .animal-editing{
-  margin-top: 10px;
-  background-color: #7fc160;
+  display: flex;
+  margin-top: 10px;  
   margin-bottom: 0;
+  width: 100%;
+  
 }
 .editing-button{
   text-decoration: none;
+  background-color: rgb(94, 169, 59);
+  flex: 1;
+  color:white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.deleting-button{
+  text-decoration: none;
+  background-color: #b25959;
+  flex: 1;
+  border: none;
+  color:white;
 }
 .router-link-active {
   text-decoration: none;
-}
 
+}
 .animal-adoption {
   display: flex;
   flex-direction: column;
@@ -201,6 +215,7 @@ export default {
 @media (max-width: 1500px) {
   .animal-column {
     width: 100%;
+    margin-bottom: 70px;
   }
 }
 
@@ -222,7 +237,9 @@ export default {
   .animal-card {
     margin-top: 40px;
     width: 70%;
+    padding-bottom: 9px;
   }
+
 }
 
 .animal-image {
