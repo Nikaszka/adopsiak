@@ -34,7 +34,7 @@ builder.Services.AddAuthentication()
         {
             context.HttpContext.Response.Cookies.Delete("X-User");
             return Task.CompletedTask;
-        }
+        };
     });
 
 builder.Services.AddIdentityCore<Admin>()
