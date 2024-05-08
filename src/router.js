@@ -10,8 +10,9 @@ import AdoptionForm from './views/AdoptionForm.vue'
 import LoginPage from './views/LoginPage.vue'
 import AddAnimal from './views/AddAnimal.vue'
 import Admin from './views/Admin.vue'
+import { isUserLogged } from './session.js'
 
-export default createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes: [
       {
@@ -53,6 +54,9 @@ export default createRouter({
       {
         path: '/admin/login',
         component: LoginPage,
+        meta: {
+          loginPage: true
+        }
       },
       {
         path: '/animal/new',
@@ -61,6 +65,27 @@ export default createRouter({
       {
         path: '/admin',
         component: Admin,
+        meta: {
+          requireAuth: true
+        }
       },
     ]
 })
+
+router.beforeEach((to, from, next) => {
+  if(to.meta.loginPage) {
+    if(isUserLogged()){
+      next('/admin');
+      return;
+    }
+  }
+  if(to.meta.requireAuth){
+    if(!isUserLogged()){
+      next('/admin/login');
+      return;
+    }
+  }
+  next();
+})
+
+export default router;

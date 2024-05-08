@@ -2,6 +2,7 @@ using AdoPsiak.Data;
 using AdoPsiak.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Text.Json.Serialization;
@@ -27,7 +28,10 @@ builder.Services.AddAuthentication()
         };
         opts.Events.OnSignedIn = context =>
         {
-            context.HttpContext.Response.Cookies.Append("X-User", context.HttpContext.User.Identity?.Name ?? "");
+            context.Response.Cookies.Append("X-User", context?.Principal?.Identity?.Name ?? "", new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(14)
+            });
             return Task.CompletedTask;
         };
         opts.Events.OnSigningOut = context =>
@@ -84,5 +88,11 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapIdentityApi<Admin>();
+app.MapPost("/logout", async (SignInManager<Admin> signInManager) =>
+{
+    await signInManager.SignOutAsync();
+})
+.WithOpenApi()
+.RequireAuthorization();
 
 app.Run();
