@@ -6,6 +6,7 @@ import Contact from './views/Contact.vue'
 import Support from './views/Support.vue'
 import Adoption from './views/Adoption.vue'
 import SelectedAnimal from './views/SelectedAnimal.vue'
+import AdoptionForm from './views/AdoptionForm.vue'
 import LoginPage from './views/LoginPage.vue'
 import AddAnimal from './views/AddAnimal.vue'
 
@@ -40,6 +41,12 @@ export default createRouter({
         path: '/animal/:id',
         name: 'SelectedAnimal',
         component: SelectedAnimal,
+        props: true
+      },
+      {
+        path: '/animal/adoption-form/:id',
+        name: 'AdoptionForm',
+        component: AdoptionForm,
         props: true
       },
       {

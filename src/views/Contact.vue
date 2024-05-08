@@ -172,7 +172,6 @@ export default {
   justify-content: center; 
 }
 
-
 .contact-info {
   border-radius: 20px;
   background-color: #daf0d0;
@@ -180,31 +179,13 @@ export default {
   color: #000;
   font-weight: 400;
   padding: 40px 28px;
-}
-
-contact-form {
-  border-radius: 20px;
-  background-color: #f0f0f0;
-  padding: 20px;
-  width: 100%; 
-  max-width: 400px; 
+  margin-top: 40px; 
 }
 
 .form-title {
   color: #000;
   font: 400 40px Inter, sans-serif;
   margin: 0; 
-}
-
-
-.contact-info {
-  border-radius: 20px;
-  background-color: #daf0d0;
-  font-size: 24px;
-  color: #000;
-  font-weight: 400;
-  padding: 40px 28px;
-  margin-top: 37px; 
 }
 
 .info-title {
@@ -217,16 +198,6 @@ contact-form {
   margin-top: 36px;
   gap: 20px;
   text-align: left;
-}
-
-.info-icon {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-}
-
-.info-text {
-  font-family: Inter, sans-serif;
 }
 
 .submit-button {
@@ -242,15 +213,7 @@ contact-form {
 
 .form-group {
   margin-bottom: 20px;
-}
-
-.form-label {
-  font-family: Inter, sans-serif;
-  align-items: start;
-  border: 1px solid rgba(209, 209, 209, 1);
-  background-color: #fff;
-  white-space: nowrap;
-  padding: 6px 15px 18px;
+  width: 100%; /* Dopasowanie szerokości form-group do form-container */
 }
 
 .form-input,
@@ -260,15 +223,39 @@ contact-form {
   border: 1px solid rgba(209, 209, 209, 1);
   background-color: #fff;
   padding: 15px;
-}
-
-.form-textarea {
-  min-height: 120px;
+  width: calc(100% - 30px); /* Ustawienie szerokości pól formularza */
 }
 
 .contact-form-fields {
   border-radius: 20px;
   background-color: #f0f0f0;
   padding: 20px;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 30px;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .contact-info {
+    width: 100%;
+    max-width: 300px; 
+    margin: 0 auto; 
+  }
+
+  .info-item {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 </style>

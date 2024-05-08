@@ -4,14 +4,15 @@ import App from './App.vue'
 import './assets/app.css'
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPhone, faEnvelope, faLocationDot, faHeart, faHandHoldingDollar, faHouse, faVenusMars, faPaw, faBars, faDog, faCat, faClock} from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faEnvelope, faLocationDot, faHeart, faHandHoldingDollar, faHouse, faVenusMars, faPaw, faBars, 
+    faDog, faCat, faClock, faPen} from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import Animal from './components/Animal.vue'
 
 library.add(faPhone, faEnvelope, faLocationDot, faInstagram, faFacebook, faHeart, faHandHoldingDollar, faHouse, faVenusMars, 
-            faPaw, faBars, faDog, faCat, faClock);
+            faPaw, faBars, faDog, faCat, faClock, faPen);
 
 createApp(App)
 .component('font-awesome-icon', FontAwesomeIcon)
