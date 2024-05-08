@@ -1,87 +1,113 @@
 <template>
-  <div class = "selected-animal-container">
-    <input type="text" id="myInput" :value="animals[index].name" class="title"></input>
-    <div class = "animal-data">
+  <div class="selected-animal-container">
+    <input type="text" id="myInput" :value="animal.name" class="title"></input>
+    <div class="animal-data">
       <div class="animal-photo">
-        <img :src="animals[index].image" :alt="animals[index].name" class="animal-image" />
+        <img :src='getPhoto(animal.animalPhotoId)' :alt="animal.name" class="animal-image" />
       </div>
-      <div class = "animal-desciption">
-        <div class = "animal-breed">
-          <font-awesome-icon icon="paw" class="info-icon"/>
-          <input type="text" id="myInput" :value="animals[index].breed" class="breed-name"></input>
+      <div class="animal-desciption">
+        <div class="animal-breed">
+          <font-awesome-icon icon="paw" class="info-icon" />
+          <input type="text" id="myInput" :value="animal.breed" class="breed-name"></input>
         </div>
-        <div class = "animal-gender">
-          <font-awesome-icon icon="venus-mars" class="info-icon"/>
-          <input type="text" id="myInput" :value="animals[index].gender + ', ' + animals[index].age" class="gender-age"></input>
+        <div class="animal-gender">
+          <font-awesome-icon icon="venus-mars" class="info-icon" />
+          <input type="text" id="myInput" :value="getGenderLabel(animal.gender) + ', ' + animal.age" class="gender-age"></input>
         </div>
-        <div class = "animal-location">
-          <font-awesome-icon icon="location-dot" class="info-icon"/>
-          <input type="text" id="myInput" :value="animals[index].location" class="location-address"></input>
+        <div class="animal-location">
+          <font-awesome-icon icon="location-dot" class="info-icon" />
+          <input type="text" id="myInput" :value="animal.localization" class="location-address"></input>
         </div>
         <div class="other-benefits">
-          <div class = "animal-benefits">
-          <font-awesome-icon icon="heart" class="heart-icon"/>
-          <input type="text" id="myInput" value="Uwielbia pieszczoty"></input>
-        </div>
-        <div class = "animal-benefits">
-          <font-awesome-icon icon="heart" class="heart-icon" />
-          <input type="text" id="myInput" value="Uwielbia zabawę" class="gender-age"></input>
-        </div>
-        <div class = "animal-benefits">
-          <font-awesome-icon icon="heart" class="heart-icon"/>
-          <input type="text" id="myInput" value="Akceptuje inne zwierzęta"></input>
-        </div>
+          <div class="animal-benefits">
+            <font-awesome-icon icon="heart" class="heart-icon" />
+            <input type="text" id="myInput" value="Uwielbia pieszczoty"></input>
+          </div>
+          <div class="animal-benefits">
+            <font-awesome-icon icon="heart" class="heart-icon" />
+            <input type="text" id="myInput" value="Uwielbia zabawę" class="gender-age"></input>
+          </div>
+          <div class="animal-benefits">
+            <font-awesome-icon icon="heart" class="heart-icon" />
+            <input type="text" id="myInput" value="Akceptuje inne zwierzęta"></input>
+          </div>
         </div>
       </div>
 
     </div>
     <div class="description">
       <textarea class="text-area" placeholder="Description">
-      {{description}}
+      {{ description }}
       </textarea>
     </div>
     <div class="animal-help">
       <div class="animal-donation">
-      <div class="animal-donation-title">Zaangażuj się w pomoc dla tego zwierzaka</div>
-      <input type="text" placeholder="0,00 zł" class="donation-input">
-      <div><button class="donation-button">Wesprzyj finansowo</button></div>
+        <div class="animal-donation-title">Zaangażuj się w pomoc dla tego zwierzaka</div>
+        <input type="text" placeholder="0,00 zł" class="donation-input">
+        <div><button class="donation-button">Wesprzyj finansowo</button></div>
+      </div>
+      <a :href="'/animal/adoption-form/' + props.id" class="router-link-active">
+        <div>
+          <div class="animal-form-title">Przejdź do formularza Adopcji </div>
+          <font-awesome-icon :icon="['fas', 'pen']" class="pen-icon" />
+        </div>
+      </a>
     </div>
-  <a :href="'/animal/adoption-form/' + props.id" class="router-link-active">
-    <div>
-      <div class="animal-form-title">Przejdź do formularza Adopcji </div>
-      <font-awesome-icon :icon="['fas', 'pen']" class="pen-icon"/>
-    </div>
-  </a>
-</div>
 
   </div>
-  
+
 
 </template>
 <script setup>
-  import { computed, ref } from 'vue'
-  import animals from '../animals.js'
-  const props = defineProps(['id'])
-  const index = computed(() => animals.findIndex(c => c.id == props.id))
-  const description = ref("Tutaj spotykasz Królewnę - roczną kicię o zielonych oczach i puszystym  futerku, która weszła do naszego schroniska z uroczym uśmiechem na  pyszczku. Królewna to kwintesencja energii i radości. Zawsze gotowa do  zabawy i szalonych akrobacji, ta malutka kotka sprawi, że twoje dni będą  pełne uśmiechu i miłości. Jej delikatne mruczenie jest jak melodia dla  uszu, a czułe przytulenie potrafi rozgrzać serce każdego. Milusia szuka  kochającego domu, w którym będzie mogła rozwinąć swoje skrzydełka i zaskakiwać swoim urokiem każdego dnia. Czy to ty jesteś tą wyjątkową  osobą, na którą Królewna czeka? Przyjdź i pozwól tej małej kulce futra  wprowadzić więcej radości do twojego życia!")
+
+const getGenderLabel = (gender) => {
+  return gender == 1 ? 'Samica' : 'Samiec';
+}
+
+const baseUrl = 'https://localhost:7241/AnimalPhoto/';
+const getPhoto = (animalPhotoId) => {
+  return `${baseUrl}${animalPhotoId}`;
+};
+import { computed, ref, onMounted } from 'vue'
+
+let animal = ref({});
+const props = defineProps(['id'])
+
+const fetchAnimal = async () => {
+  try {
+    let url = `https://localhost:7241/Animals/${props.id}`;
+
+    const response = await fetch(url);
+    animal.value = await response.json();
+  } catch (error) {
+    console.error('Error fetching animals:', error);
+  }
+};
+
+onMounted(fetchAnimal);
+const description = ref("Tutaj spotykasz Królewnę - roczną kicię o zielonych oczach i puszystym  futerku, która weszła do naszego schroniska z uroczym uśmiechem na  pyszczku. Królewna to kwintesencja energii i radości. Zawsze gotowa do  zabawy i szalonych akrobacji, ta malutka kotka sprawi, że twoje dni będą  pełne uśmiechu i miłości. Jej delikatne mruczenie jest jak melodia dla  uszu, a czułe przytulenie potrafi rozgrzać serce każdego. Milusia szuka  kochającego domu, w którym będzie mogła rozwinąć swoje skrzydełka i zaskakiwać swoim urokiem każdego dnia. Czy to ty jesteś tą wyjątkową  osobą, na którą Królewna czeka? Przyjdź i pozwól tej małej kulce futra  wprowadzić więcej radości do twojego życia!")
 </script>
 
 <style scoped>
 .info-icon,
-.heart-icon{
+.heart-icon {
   font-size: 35px;
 }
-.heart-icon{
+
+.heart-icon {
   color: green;
 }
-.other-benefits{
+
+.other-benefits {
   margin-top: 80px;
 }
-.animal-form-title{
+
+.animal-form-title {
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 10px;
 }
+
 .router-link-active {
   text-decoration: none;
   color: black;
@@ -94,26 +120,32 @@
   height: 100%;
   font: italic 400 25px Inter, sans-serif;
 }
+
 @media (max-width: 991px) {
-  .router-link-active{
+  .router-link-active {
     font: italic 400 15px Inter, sans-serif;
+  }
+
+  .info-icon,
+  .heart-icon {
+    font-size: 18px;
+  }
+
+  .other-benefits {
+    margin-top: 10px;
+  }
 }
-.info-icon,
-.heart-icon{
-  font-size: 18px;
-}
-.other-benefits{
-  margin-top: 10px;
-}
-}
-.pen-icon{
+
+.pen-icon {
   font-size: 30px;
 }
-.animal-help{
+
+.animal-help {
   margin-top: 30px;
   display: flex;
 }
-.donation-button{
+
+.donation-button {
   margin-top: 10px;
   margin-bottom: 30px;
   background-color: rgb(70, 114, 50);
@@ -124,124 +156,147 @@
   padding: 10px;
 
 }
-.donation-input{
+
+.donation-input {
   border: none;
   border-radius: 10px;
   width: 30%;
   text-align: center;
   height: 30%
 }
-.animal-donation-title{
+
+.animal-donation-title {
   font: italic 400 30px Inter, sans-serif;
   padding: 20px;
 }
-.animal-donation{
+
+.animal-donation {
   background-color: rgb(176, 212, 159);
   /* margin-bottom: 30px; */
   align-items: center;
   border-radius: 10px;
   padding-bottom: 15px;
   text-align: center;
-  flex:1;
+  flex: 1;
   margin-right: 10px
+}
 
-}
 @media (max-width: 991px) {
-  .animal-donation-title{
+  .animal-donation-title {
     font: italic 400 20px Inter, sans-serif;
+  }
 }
-}
-.selected-animal-container{
+
+.selected-animal-container {
   display: grid;
   margin-left: 200px;
   margin-right: 200px;
 }
+
 @media (max-width: 991px) {
-  .selected-animal-container{
-  margin: auto;
+  .selected-animal-container {
+    margin: auto;
+  }
 }
-}
-.title{
+
+.title {
   text-align: left;
   border: none;
   margin-top: 10px;
   margin-bottom: 30px;
   font: italic 400 50px Inter, sans-serif;
 }
+
 @media (max-width: 991px) {
-  .title{
+  .title {
     font: italic 400 30px Inter, sans-serif;
+  }
 }
-}
-.animal-data{
+
+.animal-data {
   display: flex;
   text-align: justify;
 
 }
+
 @media (max-width: 991px) {
   .animal-data {
     margin: auto;
-}}
+  }
+}
 
-.animal-photo{
+.animal-photo {
   margin-right: 30px;
 }
-.animal-photo img{
+
+.animal-photo img {
   width: 600px;
   height: auto;
 }
-@media (max-width: 1200px) {
-  .animal-photo img{
-  width: 400px;
-}}
-@media (max-width: 900px) {
-  .animal-photo img{
-  width: 200px;
-}}
 
-.animal-description{
+@media (max-width: 1200px) {
+  .animal-photo img {
+    width: 400px;
+  }
+}
+
+@media (max-width: 900px) {
+  .animal-photo img {
+    width: 200px;
+  }
+}
+
+.animal-description {
   max-width: 820px;
   margin: 0px auto;
   margin-top: 50px;
 }
-.animal-benefits{
+
+.animal-benefits {
   display: flex;
   white-space: nowrap;
   padding: 10px;
   gap: 15px;
 }
-.animal-benefits input{
+
+.animal-benefits input {
   border: none;
   font: italic 400 20px Inter, sans-serif;
 }
 
 .animal-location,
 .animal-gender,
-.animal-breed{
+.animal-breed {
   display: flex;
   white-space: nowrap;
   padding: 10px;
 }
-.animal-gender{
+
+.animal-gender {
   gap: 15px;
 }
-.animal-breed{
+
+.animal-breed {
   gap: 25px;
 }
-.animal-location{
+
+.animal-location {
   gap: 30px;
 }
+
 .animal-location input,
 .animal-gender input,
-.animal-breed input{
+.animal-breed input {
   border: none;
   font: italic 400 20px Inter, sans-serif;
 }
+
 .description {
   float: left;
   width: 100%;
   height: auto;
 }
+
 .text-area {
   float: left;
   width: 100%;
@@ -252,23 +307,25 @@
   font: italic 400 20px Inter, sans-serif;
   text-align: justify;
 }
+
 @media (max-width: 900px) {
-  .text-area{
+  .text-area {
     font: italic 400 15px Inter, sans-serif;
     margin: 10px;
-}
-.animal-location input,
-.animal-gender input,
-.animal-breed input,
-.animal-benefits input{
-  font: italic 400 13px Inter, sans-serif;
-}
-.animal-location,
-.animal-gender,
-.animal-breed,
-.animal-benefits{
-  padding: 3px;
-}
-}
+  }
 
+  .animal-location input,
+  .animal-gender input,
+  .animal-breed input,
+  .animal-benefits input {
+    font: italic 400 13px Inter, sans-serif;
+  }
+
+  .animal-location,
+  .animal-gender,
+  .animal-breed,
+  .animal-benefits {
+    padding: 3px;
+  }
+}
 </style>

@@ -13,7 +13,8 @@ const getPhoto = (animalPhotoId) => {
         <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id }}" class="router-link-active">
           <div class="animal-card">
             <!-- <img src='https://localhost:7241/AnimalPhoto/8439f023-f3b1-4fb2-af6e-ab9f4332b3c2' :alt="animal.name" class="animal-image" /> -->
-            <img :src='getPhoto(animal.animalPhotoId)' :alt="animal.name" class="animal-image" />
+            <img v-if="animal.animalPhotoId" :src='getPhoto(animal.animalPhotoId)' :alt="animal.name" class="animal-image" />
+            <img v-if="!animal.animalPhotoId" :alt="animal.name" class="animal-image" />
             <h3 class="animal-name">{{ animal.name }}</h3>
             <div class="animal-breed">
               <font-awesome-icon icon="paw" />
