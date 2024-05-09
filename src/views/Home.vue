@@ -1,12 +1,5 @@
 <template>
   <PercentTax></PercentTax>
-  <!-- <div class="percent-tax-rate-box">
-    <div class="percent-tax-rate-title">Pomóż naszym zwierzakom przekazując 1,5% swojego podatku</div>
-    <div class="percent-tax-rate-images">
-      <img v-for="(image, index) in images" :key="index" :src="image.src" :alt="image.alt" />
-    </div>
-    <div class="KRS-info">KRS: 1234567899</div>
-  </div> -->
 
   <!-- <div class="animal-adoption">
     <h2 class="section-title">Zwierzaki do adopcji</h2>
@@ -42,14 +35,13 @@
     <router-link to="/animals" class="more-animals-btn">Więcej zwierzaków</router-link>
   </div>
   
-
   <div class="stats-container">
     <div class="stats-wrapper">
       <div class="percent-tax-rate-title">AdoPsiak w liczbach</div>
       <div class="stats-row">
         <div v-for="(stat, index) in stats" :key="index" class="stats-item">
           <font-awesome-icon :icon="stat.icon" size="2xl" style="color: #ffffff;" />
-          <p class="stats-value">{{ stat.value }}</p>
+          <p class="stats-value">{{stat.value}}</p>
           <p class="stats-label">{{ stat.label }}</p>
         </div>
       </div>
@@ -63,7 +55,7 @@ import PercentTax from '../components/PercentTax.vue'
 import { reactive, onMounted, ref } from 'vue';
 
 const animals = reactive([]);
-
+// const MonetarySum = reactive([]);
 let currentPage = 1;
 
 const fetchAnimals = async () => {
@@ -79,13 +71,28 @@ const fetchAnimals = async () => {
   }
 };
 
-onMounted(fetchAnimals); // Fetch animals when the component is mounted
+// const fetchMonetarySum = async () => {
+//   try {
+//     let url = `https://localhost:7241/MonetarySupportController`;
 
+//     const response = await fetch(url);
+//     const data = await response.json();
+
+
+//     MonetarySum.push(...data);
+//   } catch (error) {
+//     console.error('Error fetching monetary:', error);
+//   }
+// };
+
+onMounted(fetchAnimals); // Fetch animals when the component is mounted
+// onMounted(fetchMonetarySum);
 const animalsPerPage = 4;
 
-// const images = reactive([{ src: "/kot_syjamski.png", alt: "obrazek" },
-//                          { src: "/pies1.jpg", alt: "obraz2" },
-//                          { src: "/pies3.jpg", alt: "obraz3" }]);
+const stats = reactive([        
+        { icon: "heart", value: "321", label: "zwierząt do adopcji" },
+        { icon: "hand-holding-dollar", value: "258 035,25 zł", label: "zebranych środków w ramach wsparcia" },
+        { icon: "house", value: "1231", label: "zwierząt znalazło swój dom" }]);
 
 </script>
 
@@ -115,6 +122,11 @@ export default {
 </script> -->
 
 <style scoped>
+.percent-tax-rate-title {
+  text-align: center;
+  padding: 20px;
+  font-size: 35px;
+}
 
 .router-link-active {
   text-decoration: none;
@@ -315,77 +327,6 @@ export default {
 @media (max-width: 991px) {
   .divider {
     max-width: 100%;
-  }
-}
-
-.percent-tax-rate-box {
-  background-color: rgb(176, 212, 159);
-  margin-left: 300px;
-  margin-right: 300px;
-  margin-bottom: 30px;
-  align-items: center;
-  border-radius: 10px;
-  padding-bottom: 15px;
-  text-align: center;
-}
-
-.percent-tax-rate-images {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.percent-tax-rate-images img {
-  width: 240px;
-  padding: 15px;
-}
-
-.percent-tax-rate-title {
-  text-align: center;
-  padding: 20px;
-  font-size: 35px;
-}
-
-.KRS-info {
-  background-color: rgb(130, 78, 78);
-  color: white;
-  text-align: center;
-  font-size: 25px;
-  border-radius: 10px;
-  margin-left: 300px;
-  margin-right: 300px;
-}
-
-@media (max-width: 1200px) {
-  .percent-tax-rate-box {
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-  }
-  .percent-tax-rate-images img {
-    width: 120px;
-    padding: 5px;
-    margin-left: 5px;
-  }
-  .percent-tax-rate-title {
-    text-align: center;
-    padding: 20px;
-    font-size: 20px;
-  }
-  .percent-tax-rate-images {
-    justify-content: center;
-  }
-  .KRS-info {
-    background-color: rgb(130, 78, 78);
-    color: white;
-    text-align: center;
-    font-size: 20px;
-    border-radius: 10px;
-    margin-left: 70px;
-    margin-right: 70px;
-  }
-  .image-item {
-    width: 90px;
   }
 }
 </style>
