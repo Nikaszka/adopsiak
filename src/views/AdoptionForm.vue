@@ -1,317 +1,293 @@
 <template>
-    <div class="adoption-form-container">
-        <h1>Formularz adopcyjny</h1>
-        <p>Prosimy o podanie podstawowych danych kontaktowych, 
-            które umożliwią nam dalszą komunikację oraz ustalenie 
-            szczegółów związanych z procesem adopcji.</p>
-    </div>
-    <div class="contact-container">
+  <div class="adoption-form-container">
+    <h1>Formularz adopcyjny</h1>
+    <p>Prosimy o podanie podstawowych danych kontaktowych,
+      które umożliwią nam dalszą komunikację oraz ustalenie
+      szczegółów związanych z procesem adopcji.</p>
+  </div>
+  <div class="contact-container">
     <div class="contact-form">
       <div class="form-container">
-        <form class="contact-form-fields" @submit.prevent="submitForm('contact')">
-            <h2 class="form-title">Dane kontaktowe:</h2>
-                      
-            <div class="form-group">
+        <form class="contact-form-fields">
+          <h2 class="form-title">Dane kontaktowe:</h2>
+
+          <div class="form-group">
             <label for="firstName"></label>
-            <input
-              type="text"
-              id="firstName"
-              v-model="formData.firstName"
-              class="form-input"
-              placeholder="Imię*"
-              required
-            />
+            <input type="text" id="firstName" v-model="formData.firstName" class="form-input" placeholder="Imię*"
+              required />
           </div>
           <div class="form-group">
             <label for="lastName"></label>
-            <input
-              type="text"
-              id="lastName"
-              v-model="formData.lastName"
-              class="form-input"
-              placeholder="Nazwisko*"
-              required
-            />
+            <input type="text" id="lastName" v-model="formData.lastName" class="form-input" placeholder="Nazwisko*"
+              required />
           </div>
           <div class="form-group">
             <label for="phone"></label>
-            <input
-              type="tel"
-              id="phone"
-              v-model="formData.phone"
-              class="form-input"
-              placeholder="Numer telefonu"
-            />
+            <input type="text" id="phone" v-model="formData.address.phoneNumber" class="form-input"
+              placeholder="Numer telefonu" />
           </div>
           <div class="form-group">
             <label for="email"></label>
-            <input
-              type="email"
-              id="email"
-              v-model="formData.email"
-              class="form-input"
-              placeholder="Adres e-mail*"
-              required
-            />
+            <input type="email" id="email" v-model="formData.emailAddress" class="form-input"
+              placeholder="Adres e-mail*" required />
           </div>
           <h2 class="form-title">Adres zamieszkania:</h2>
           <div class="form-group">
             <label for="street"></label>
-            <input
-              type="text"
-              id="street"
-              v-model="formData.street"
-              class="form-input"
-              placeholder="Ulica*"
-              required
-            />
+            <input type="text" id="street" v-model="formData.address.streetName" class="form-input" placeholder="Ulica*"
+              required />
           </div>
           <div class="form-group">
             <label for="number"></label>
-            <input
-              type="number"
-              id="number"
-              v-model="formData.number"
-              class="form-input"
-              placeholder="Numer*"
-              required
-            />
+            <input type="text" id="number" v-model="formData.address.apartmentNumber" class="form-input"
+              placeholder="Numer*" required />
           </div>
           <div class="form-group">
             <label for="city"></label>
-            <input
-              type="text"
-              id="city"
-              v-model="formData.city"
-              class="form-input"
-              placeholder="Miasto*"
-              required
-            />
+            <input type="text" id="city" v-model="formData.address.city" class="form-input" placeholder="Miasto*"
+              required />
           </div>
           <div class="form-group">
             <label for="province"></label>
-            <input
-              type="text"
-              id="province"
-              v-model="formData.province"
-              class="form-input"
-              placeholder="Województwo*"
-              required
-            />
+            <input type="text" id="province" v-model="formData.address.voivodeship" class="form-input"
+              placeholder="Województwo*" required />
           </div>
           <div class="form-group">
             <label for="postalCode"></label>
-            <input
-              type="text"
-              id="postalCode"
-              v-model="formData.postalCode"
-              class="form-input"
-              placeholder="Kod pocztowy*"
-              required
-              pattern="[0-9]{2}-[0-9]{3}"
-              title="Proszę wprowadzić kod pocztowy w formacie XX-XXX"
-            />
+            <input type="text" id="postalCode" v-model="formData.address.zipCode" class="form-input"
+              placeholder="Kod pocztowy*" required pattern="[0-9]{2}-[0-9]{3}"
+              title="Proszę wprowadzić kod pocztowy w formacie XX-XXX" />
           </div>
         </form>
       </div>
     </div>
 
     <div class="contact-info">
-        <p>Wybrany zwierzak: </p>
-    <div class="animal-card">
-        <img :src="animals[index].image" :alt="animals[index].name" class="animal-image"/>
-        <h3 class="animal-name">{{ animals[index].name }}</h3>
+      <p>Wybrany zwierzak:</p>
+      <div class="animal-card">
+        <img v-if="animal.animalPhotoId" :src='getPhoto(animal.animalPhotoId)' :alt="animal.name"
+          class="animal-image" />
+        <img v-if="!animal.animalPhotoId" :alt="animal.name" class="animal-image" />
+        <h3 class="animal-name">{{ animal.name }}</h3>
         <div class="animal-breed">
-            <font-awesome-icon icon="paw"/>
-            <span class="breed-name">{{ animals[index].breed }}</span>
+          <font-awesome-icon icon="paw" />
+          <span class="breed-name">{{ animal.breed }}</span>
         </div>
         <div class="animal-gender">
-            <font-awesome-icon icon="venus-mars"/>
-            <span class="gender-age">{{ animals[index].gender }}, {{ animals[index].age }}</span>
+          <font-awesome-icon icon="venus-mars" />
+          <span class="gender-age">{{ animal.gender }}, {{ animal.age }}</span>
         </div>
         <div class="animal-location">
-            <font-awesome-icon icon="location-dot"/>
-            <span class="location-address">{{ animals[index].location }}</span>
+          <font-awesome-icon icon="location-dot" />
+          <span class="location-address">{{ animal.localization }}</span>
         </div>
-    </div>
-</div>
-</div>
-
-<div class="contact-form-big">
-      <div class="form-container">
-        <form class="contact-form-fields" @submit.prevent="submitForm('adoption')">
-          <div class="form-group">
-            <label for="firstQuestion">
-                1. Prosimy o szczegółowy opis środowiska, w którym będzie mieszkał 
-                adoptowany pies.Podaj typ mieszkania (np. mieszkanie, dom z ogrodem),
-                 liczbę schodów do pokonania, dostępność windy oraz informacje 
-                 o najbliższych terenach zielonych(parki, wybiegi dla psów). 
-                 Zwróć także uwagę na miejsce, gdzie pies będzie miał swoje 
-                 legowisko do spania (np. łóżko w sypialni, kanapa, kojec, 
-                 osobne legowisko).
-            </label>
-            <textarea
-              id="firstQuestion"
-              v-model="formData.firstQuestion"
-              class="form-textarea"
-              placeholder="Treść wiadomości*"
-              required
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label for="secondQuestion">
-                2. Czy miałeś/aś w przeszłości jakieś zwierzęta domowe? Prosimy o 
-                krótki opis twoich doświadczeń z poprzednimi zwierzętami. Wymień, 
-                skąd trafiły one do twojego domu, jak współżyły z innymi członkami 
-                rodziny, czy napotkały jakieś problemy zdrowotne lub behawioralne. 
-                Podaj również, jak długo żyły i czy były sterylizowane lub kastrowane. 
-                Te informacje pomogą nam zrozumieć twoje doświadczenie w opiece 
-                nad zwierzętami oraz przygotowanie do potencjalnych wyzwań związanych 
-                z adopcją nowego psa.
-            </label>
-            <textarea
-              id="secondQuestion"
-              v-model="formData.secondQuestion"
-              class="form-textarea"
-              placeholder="Treść wiadomości*"
-              required
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label for="secondQuestion">
-                3. Czy w Twoim najbliższym otoczeniu znajdują się inne psy, koty, 
-                lub jakiekolwiek inne zwierzęta?Opisz, jakie zwierzęta są częścią 
-                Twojego codziennego środowiska. Dodatkowo, zastanów się i podaj 
-                informacje na temat miejsc, które regularnie odwiedzasz — czy 
-                adoptowany pies będzie miał tam możliwość kontaktu z innymi 
-                zwierzętami? Te informacje są ważne, aby ocenić, jak pies może 
-                reagować na inne zwierzęta i jakie środki należy podjąć, aby 
-                zapewnić bezpieczne i harmonijne współistnienie.
-            </label>
-            <textarea
-              id="thirdQuestion"
-              v-model="formData.thirdQuestion"
-              class="form-textarea"
-              placeholder="Treść wiadomości*"
-              required
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label for="fourthQuestion">
-                4. Czy zdajesz sobie sprawę, że adopcja psa wiąże sięz długoterminowymi 
-                zobowiązaniami, w tym opieką nad nim zarówno w zdrowiu, jak i w chorobie? 
-                Czy jesteś przygotowany/a na pokrycie potencjalnie wysokich kosztów 
-                leczenia psa, gdyby wystąpiła taka potrzeba? Prosimy o przemyślenie 
-                i opisanie swojej gotowości do finansowania opieki zdrowotnej dla psa, 
-                włączając w to regularne wizyty u weterynarza, szczepienia, ewentualne 
-                operacje czy specjalistyczne traktowanie.
-            </label>
-            <textarea
-              id="fourthQuestion"
-              v-model="formData.fourthQuestion"
-              class="form-textarea"
-              placeholder="Treść wiadomości*"
-              required
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label>
-                <input
-                    type="checkbox"
-                    v-model="formData.agreeTerms"
-                    class="form-checkbox"
-                    required
-                />
-                Oświadczam, że mam świadomość, że przed adopcją należy upewnić się, 
-                że u żadnego z domowników nie występuje alergia na sierść lub 
-                ślinę zwierzęcia, a jeśli występuje należy adopcję skonsultować 
-                z lekarzem.
-            </label>
-          </div>
-          <div class="form-group">
-            <label>
-                <input
-                    type="checkbox"
-                    v-model="formData.agreeDatas"
-                    class="form-checkbox"
-                    required
-                />
-                Wyrażam zgodę na przetwarzanie danych osobowych przez Schronisko AdoPsiak.
-            </label>
-          </div>
-          <div class="form-group">
-            <label>
-                <input
-                    type="checkbox"
-                    v-model="formData.agreeStatus"
-                    class="form-checkbox"
-                    required
-                />
-                Akceptuję 
-                <a href="https://ciapkowo.pl/wirtualna-adopcja/" target="_blank">regulamin</a>
-                i 
-                <a href="https://ciapkowo.pl/polityka-prywatnosci/" target="_blank">politykę prywatności</a>
-            </label>
-          </div>
-          <button @click="submitForm" class="submit-button">Wyślij</button>
-        </form>
       </div>
     </div>
+  </div>
+
+  <div class="contact-form-big">
+    <div class="form-container">
+      <form class="contact-form-fields">
+        <div class="form-group">
+          <label for="firstQuestion">
+            1. Prosimy o szczegółowy opis środowiska, w którym będzie mieszkał
+            adoptowany pies.Podaj typ mieszkania (np. mieszkanie, dom z ogrodem),
+            liczbę schodów do pokonania, dostępność windy oraz informacje
+            o najbliższych terenach zielonych(parki, wybiegi dla psów).
+            Zwróć także uwagę na miejsce, gdzie pies będzie miał swoje
+            legowisko do spania (np. łóżko w sypialni, kanapa, kojec,
+            osobne legowisko).
+          </label>
+          <textarea id="firstQuestion" v-model="formData.answer.aboutEnviroment" class="form-textarea"
+            placeholder="Treść wiadomości*" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="secondQuestion">
+            2. Czy miałeś/aś w przeszłości jakieś zwierzęta domowe? Prosimy o
+            krótki opis twoich doświadczeń z poprzednimi zwierzętami. Wymień,
+            skąd trafiły one do twojego domu, jak współżyły z innymi członkami
+            rodziny, czy napotkały jakieś problemy zdrowotne lub behawioralne.
+            Podaj również, jak długo żyły i czy były sterylizowane lub kastrowane.
+            Te informacje pomogą nam zrozumieć twoje doświadczenie w opiece
+            nad zwierzętami oraz przygotowanie do potencjalnych wyzwań związanych
+            z adopcją nowego psa.
+          </label>
+          <textarea id="secondQuestion" v-model="formData.answer.aboutExperienceWithAnimals" class="form-textarea"
+            placeholder="Treść wiadomości*" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="secondQuestion">
+            3. Czy w Twoim najbliższym otoczeniu znajdują się inne psy, koty,
+            lub jakiekolwiek inne zwierzęta?Opisz, jakie zwierzęta są częścią
+            Twojego codziennego środowiska. Dodatkowo, zastanów się i podaj
+            informacje na temat miejsc, które regularnie odwiedzasz — czy
+            adoptowany pies będzie miał tam możliwość kontaktu z innymi
+            zwierzętami? Te informacje są ważne, aby ocenić, jak pies może
+            reagować na inne zwierzęta i jakie środki należy podjąć, aby
+            zapewnić bezpieczne i harmonijne współistnienie.
+          </label>
+          <textarea id="thirdQuestion" v-model="formData.answer.aboutOtherAnimals" class="form-textarea"
+            placeholder="Treść wiadomości*" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="fourthQuestion">
+            4. Czy zdajesz sobie sprawę, że adopcja psa wiąże sięz długoterminowymi
+            zobowiązaniami, w tym opieką nad nim zarówno w zdrowiu, jak i w chorobie?
+            Czy jesteś przygotowany/a na pokrycie potencjalnie wysokich kosztów
+            leczenia psa, gdyby wystąpiła taka potrzeba? Prosimy o przemyślenie
+            i opisanie swojej gotowości do finansowania opieki zdrowotnej dla psa,
+            włączając w to regularne wizyty u weterynarza, szczepienia, ewentualne
+            operacje czy specjalistyczne traktowanie.
+          </label>
+          <textarea id="fourthQuestion" v-model="formData.answer.aboutResponsibility" class="form-textarea"
+            placeholder="Treść wiadomości*" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" class="form-checkbox" required />
+            Oświadczam, że mam świadomość, że przed adopcją należy upewnić się,
+            że u żadnego z domowników nie występuje alergia na sierść lub
+            ślinę zwierzęcia, a jeśli występuje należy adopcję skonsultować
+            z lekarzem.
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" class="form-checkbox" required />
+            Wyrażam zgodę na przetwarzanie danych osobowych przez Schronisko AdoPsiak.
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" class="form-checkbox" required />
+            Akceptuję
+            <a href="https://ciapkowo.pl/wirtualna-adopcja/" target="_blank">regulamin</a>
+            i
+            <a href="https://ciapkowo.pl/polityka-prywatnosci/" target="_blank">politykę prywatności</a>
+          </label>
+        </div>
+        <button @click="submitForm" class="submit-button">Wyślij</button>
+      </form>
+    </div>
+  </div>
+
 
 
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue'
-  const props = defineProps(['id'])
-  const index = computed(() => animals.findIndex(c => c.id == props.id))
 
-</script>
 
-<script>
+import { computed, ref, onMounted, reactive } from 'vue'
+const props = defineProps(['id'])
+
+
+const animal = ref({});
+
+let currentPage = 1;
+
+const fetchanimal = async () => {
+  try {
+    let url = `https://localhost:7241/animals/${props.id}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    animal.value = data;
+  } catch (error) {
+    console.error('Error fetching animal:', error);
+  }
+};
+
+onMounted(fetchanimal);
+
+const baseUrl = 'https://localhost:7241/AnimalPhoto/';
+const getPhoto = (animalPhotoId) => {
+  return `${baseUrl}${animalPhotoId}`;
+};
 
 const formData = ref({
+  firstName: "",
+  lastName: "",
+  emailAddress: "",
+  address: {
+    phoneNumber: "",
+    streetName: "",
+    apartmentNumber: "",
+    city: "",
+    voivodeship: "",
+    zipCode: ""
+  },
+  selectedAnimalId: props.id,
+  answer: {
+    aboutEnviroment: "",
+    aboutExperienceWithAnimals: "",
+    aboutOtherAnimals: "",
+    aboutResponsibility: ""
+  }
+});
+
+const submitForm = async () => {
+  const url = "https://localhost:7241/AdoptionForms/add";
+  if (allFieldsFilled()) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData.value)
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log('Formularz został pomyślnie przesłany:', data);
+      resetForm();
+    } catch (error) {
+      console.error('Wystąpił błąd podczas wysyłania formularza:', error);
+    }
+  } else {
+    alert("Proszę uzupełnić wszystkie pola formularza.")
+  }
+
+};
+
+const resetForm = () => {
+  formData.value = {
     firstName: "",
     lastName: "",
-    phone: "",
-    email: "",
-    street: "",
-    number: "",
-    city: "",
-    province: "",
-    postalCode: "",
-    firstQuestion: "",
-    secondQuestion: "",
-    thirdQuestion: "",
-    fourthQuestion: "",
-    agreeTerms: "",
-    agreeDatas: "",
-    agreeStatus: "",
-})
-
-function submitForm() {
-        if (allFieldsFilled()) {
-            console.log("Form submitted:", formData.value);
-            // Zresetuj pola formularzy po wysłaniu
-            Object.keys(formData.value).forEach(key => {
-                formData.value[key] = ""
-            })
-        } else {
-            alert("Proszę uzupełnić wszystkie pola formularza.")
-        }
+    emailAddress: "",
+    address: {
+      phoneNumber: "",
+      streetName: "",
+      apartmentNumber: "",
+      city: "",
+      voivodeship: "",
+      zipCode: ""
+    },
+    selectedAnimalId: 0,
+    answer: {
+      aboutEnviroment: "",
+      aboutExperienceWithAnimals: "",
+      aboutOtherAnimals: "",
+      aboutResponsibility: "",
     }
+  };
+};
 
-    function allFieldsFilled() {
-        // Sprawdź, czy wszystkie pola są uzupełnione
-        return Object.values(formData.value).every(value => value !== "")
-    }
+
+function allFieldsFilled() {
+  // Sprawdź, czy wszystkie pola są uzupełnione
+  return Object.values(formData.value).every(value => value !== "")
+}
+
 </script>
 
 <style scoped>
 .adoption-form-container {
-    text-align: center;
-    padding-bottom: 20px;
+  text-align: center;
+  padding-bottom: 20px;
 }
+
 .animal-card {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   background-color: #fdfafa;
@@ -368,17 +344,17 @@ function submitForm() {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .contact-form {
-    width: 50%;
+  width: 50%;
 }
 
 .contact-form-big {
-    max-width: 75%;
-    padding-top: 30px;
-    margin: 0 auto;
+  max-width: 75%;
+  padding-top: 30px;
+  margin: 0 auto;
 }
 
 
@@ -396,7 +372,7 @@ function submitForm() {
 .form-title {
   color: #000;
   font: 400 40px Inter, sans-serif;
-  margin: 0; 
+  margin: 0;
 }
 
 .submit-button {
@@ -412,7 +388,7 @@ function submitForm() {
 
 .form-group {
   margin-bottom: 20px;
-  width: 100%; 
+  width: 100%;
 }
 
 .form-input,
@@ -422,7 +398,8 @@ function submitForm() {
   border: 1px solid rgba(209, 209, 209, 1);
   background-color: #fff;
   padding: 15px;
-  width: calc(100% - 30px); /* Ustawienie szerokości pól formularza */
+  width: calc(100% - 30px);
+  /* Ustawienie szerokości pól formularza */
 }
 
 .contact-form-fields {
@@ -448,8 +425,8 @@ function submitForm() {
 
   .contact-info {
     width: 100%;
-    max-width: 300px; 
-    margin: 0 auto; 
+    max-width: 300px;
+    margin: 0 auto;
   }
 
 }
