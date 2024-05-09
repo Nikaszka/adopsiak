@@ -70,17 +70,6 @@ const login = async () => {
   }
 };
 
-const isLoggedIn = ref(true);  //token
-
-const przeniesDoStronyZInputami = () => {
-  // Przeniesienie użytkownika do strony z inputami
-  router.push('/strona-z-inputami');
-};
-
-const dodaj = () => {
-  // Logika dodawania
-  console.log('Przycisk "Dodaj" został kliknięty');
-};
 </script>
 
 <style scoped>
@@ -109,7 +98,6 @@ input[type="password"] {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  position: center;
 }
 
 button {
