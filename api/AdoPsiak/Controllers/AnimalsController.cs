@@ -93,25 +93,25 @@ namespace AdoPsiak.Controllers
         {
             var query = _context.Animals.AsQueryable();
 
-            if(genus is not null)
+            if (genus is not null)
             {
-                if(genus == "dog")
+                if (genus == "dog")
                 {
                     query = query.Where(a => a.Genus == Genus.Dog);
                 }
-                if(genus == "cat")
+                if (genus == "cat")
                 {
                     query = query.Where(a => a.Genus == Genus.Cat);
                 }
             }
 
-            if(gender is not null)
+            if (gender is not null)
             {
-                if(gender == "male")
+                if (gender == "male")
                 {
                     query = query.Where(a => a.Gender == Gender.Male);
                 }
-                if(gender == "female")
+                if (gender == "female")
                 {
                     query = query.Where(a => a.Gender == Gender.Female);
                 }
@@ -119,7 +119,7 @@ namespace AdoPsiak.Controllers
 
 
             var animals = await query.OrderByDescending(a => a.Id)
-                .Skip((page-1)*pageSize)
+                .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
             return Ok(animals);
@@ -157,8 +157,8 @@ namespace AdoPsiak.Controllers
             return Ok();
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateAnimal(int id, [FromBody] Animal updatedAnimal)
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateAnimal(int id, [FromBody] UpdateAnimalDto updatedAnimal)
         {
             var dbAnimal = await _context.Animals.FindAsync(id);
             if (dbAnimal is null)
@@ -170,9 +170,9 @@ namespace AdoPsiak.Controllers
             dbAnimal.Age = updatedAnimal.Age;
             dbAnimal.Breed = updatedAnimal.Breed;
             dbAnimal.Localization = updatedAnimal.Localization;
-            dbAnimal.Genus = updatedAnimal.Genus;
-            dbAnimal.Gender = updatedAnimal.Gender;
-            dbAnimal.Status = updatedAnimal.Status;
+            dbAnimal.Genus = (Genus)updatedAnimal.Genus;
+            dbAnimal.Gender = (Gender)updatedAnimal.Gender;
+            dbAnimal.Status = (AnimalStatus)updatedAnimal.Status;
             dbAnimal.Description = updatedAnimal.Description;
             dbAnimal.CatFriendly = updatedAnimal.CatFriendly;
             dbAnimal.DogFriendly = updatedAnimal.DogFriendly;
