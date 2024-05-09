@@ -1,13 +1,14 @@
 <template>
-  <div class="percent-tax-rate-box">
+  <PercentTax></PercentTax>
+  <!-- <div class="percent-tax-rate-box">
     <div class="percent-tax-rate-title">Pomóż naszym zwierzakom przekazując 1,5% swojego podatku</div>
     <div class="percent-tax-rate-images">
       <img v-for="(image, index) in images" :key="index" :src="image.src" :alt="image.alt" />
     </div>
     <div class="KRS-info">KRS: 1234567899</div>
-  </div>
+  </div> -->
 
-  <div class="animal-adoption">
+  <!-- <div class="animal-adoption">
     <h2 class="section-title">Zwierzaki do adopcji</h2>
     <div class="animal-grid">
       <div v-for="(animal, index) in animals" :key="index" class="animal-column">
@@ -31,8 +32,16 @@
         </router-link>
       </div>
     </div>
+  </div> -->
+    <div class="animal-adoption">
+    <div class="animal-grid">
+      <div v-for="animal in animals" :key="animal.id" class="animal-column">
+        <Animal :animal='animal'></Animal>
+      </div>
+    </div>
     <router-link to="/animals" class="more-animals-btn">Więcej zwierzaków</router-link>
   </div>
+  
 
   <div class="stats-container">
     <div class="stats-wrapper">
@@ -47,8 +56,40 @@
     </div>
   </div>
 </template>
+<script setup>
+//import z bazy
+import Animal from '../components/Animal.vue'
+import PercentTax from '../components/PercentTax.vue'
+import { reactive, onMounted, ref } from 'vue';
 
-<script>
+const animals = reactive([]);
+
+let currentPage = 1;
+
+const fetchAnimals = async () => {
+  try {
+    let url = `https://localhost:7241/Animals?page=${currentPage}&pageSize=${animalsPerPage}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    animals.push(...data);
+  } catch (error) {
+    console.error('Error fetching animals:', error);
+  }
+};
+
+onMounted(fetchAnimals); // Fetch animals when the component is mounted
+
+const animalsPerPage = 4;
+
+// const images = reactive([{ src: "/kot_syjamski.png", alt: "obrazek" },
+//                          { src: "/pies1.jpg", alt: "obraz2" },
+//                          { src: "/pies3.jpg", alt: "obraz3" }]);
+
+</script>
+
+<!-- <script>
 export default {
   data() {
     return {
@@ -71,7 +112,7 @@ export default {
     };
   }
 };
-</script>
+</script> -->
 
 <style scoped>
 
