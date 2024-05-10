@@ -11,6 +11,7 @@ import LoginPage from './views/LoginPage.vue'
 import AddAnimal from './views/AddAnimal.vue'
 import Admin from './views/Admin.vue'
 import EditAnimal from './views/EditAnimal.vue'
+import FormDetails from './views/FormDetails.vue'
 import { isUserLogged } from './session.js'
 
 const router = createRouter({
@@ -79,6 +80,12 @@ const router = createRouter({
         meta: {
           requireAuth: true
         }
+      },
+      {
+        path: '/AdoptionForms/:id',
+        name: 'FormDetails',
+        component: FormDetails,
+        props: true
       },
     ],
     scrollBehavior(to, from, savedPosition) {
