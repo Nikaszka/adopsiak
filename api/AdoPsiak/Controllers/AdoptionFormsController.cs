@@ -46,7 +46,6 @@ namespace AdoPsiak.Controllers
             return Created($"/adoptionforms/{form.Id}", form.Id);
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllForms()
         {
@@ -54,7 +53,6 @@ namespace AdoPsiak.Controllers
             return Ok(forms);
         }
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetForm(int id)
         {
