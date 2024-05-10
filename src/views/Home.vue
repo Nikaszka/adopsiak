@@ -26,7 +26,7 @@
       </div>
     </div>
   </div> -->
-    <div class="animal-adoption">
+  <div class="animal-adoption">
     <div class="animal-grid">
       <div v-for="animal in animals" :key="animal.id" class="animal-column">
         <Animal :animal='animal'></Animal>
@@ -34,14 +34,14 @@
     </div>
     <router-link to="/animals" class="more-animals-btn">Więcej zwierzaków</router-link>
   </div>
-  
+
   <div class="stats-container">
     <div class="stats-wrapper">
       <div class="percent-tax-rate-title">AdoPsiak w liczbach</div>
       <div class="stats-row">
         <div v-for="(stat, index) in stats" :key="index" class="stats-item">
           <font-awesome-icon :icon="stat.icon" size="2xl" style="color: #ffffff;" />
-          <p class="stats-value">{{stat.value}}</p>
+          <p class="stats-value">{{ stat.value }}</p>
           <p class="stats-label">{{ stat.label }}</p>
         </div>
       </div>
@@ -89,10 +89,37 @@ onMounted(fetchAnimals); // Fetch animals when the component is mounted
 // onMounted(fetchMonetarySum);
 const animalsPerPage = 4;
 
-const stats = reactive([        
-        { icon: "heart", value: "321", label: "zwierząt do adopcji" },
-        { icon: "hand-holding-dollar", value: "258 035,25 zł", label: "zebranych środków w ramach wsparcia" },
-        { icon: "house", value: "1231", label: "zwierząt znalazło swój dom" }]);
+const forAdoptionNumber = ref();
+const adoptedNumber = ref();
+const sumMonetarySupport = ref("");
+
+const fetchAnimalStats = async () => {
+  try {
+    const response = await fetch('https://localhost:7241/Animals/stats');
+    const data = await response.json();
+    forAdoptionNumber.value = data.forAdoption;
+    adoptedNumber.value = data.adopted;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+const fetchSumMonetarySupport = async () => {
+  try {
+    const response = await fetch('https://localhost:7241/MonetarySupport/sum');
+    const data = await response.json();
+    sumMonetarySupport.value = parseFloat(data).toFixed(2) + " zł";
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+onMounted(fetchAnimalStats);
+onMounted(fetchSumMonetarySupport);
+
+const stats = reactive([
+  { icon: "heart", value: forAdoptionNumber, label: "zwierząt do adopcji" },
+  { icon: "hand-holding-dollar", value: sumMonetarySupport, label: "zebranych środków w ramach wsparcia" },
+  { icon: "house", value: adoptedNumber, label: "zwierząt znalazło swój dom" }]);
 
 </script>
 
@@ -172,6 +199,7 @@ export default {
     margin-right: 0px;
     gap: 0;
   }
+
   .animal-adoption {
     margin-left: 0px;
     margin-right: 0px;
@@ -312,7 +340,7 @@ export default {
   .divider-container {
     max-width: 100%;
     margin-top: 40px;
-    
+
   }
 
 }

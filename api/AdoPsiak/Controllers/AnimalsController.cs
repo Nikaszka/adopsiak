@@ -164,6 +164,19 @@ namespace AdoPsiak.Controllers
             return Ok(animal);
         }
 
+        [HttpGet("stats")]
+        public async Task<IActionResult> GetStats()
+        {
+            var countAdopted = await _context.Animals.CountAsync(a => a.Status == AnimalStatus.Adopted);
+            var countForAdoption = await _context.Animals.CountAsync(a => a.Status == AnimalStatus.ForAdoption);
+
+            return Ok(new AnimalStatsDto
+            {
+                Adopted = countAdopted,
+                ForAdoption = countForAdoption
+            });
+        }
+
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteAnimal(int id)
         {
