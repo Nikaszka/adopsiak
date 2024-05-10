@@ -238,7 +238,7 @@ export default {
   .contact-container {
     flex-direction: column;
     align-items: center;
-    margin: 0 30px;
+    margin: 0 auto;
   }
 
   .contact-form {
@@ -246,16 +246,30 @@ export default {
     max-width: 400px;
     margin: 0 auto;
   }
+  .info-text{
+    font: 400 20px Inter, sans-serif;  
+  }
 
   .contact-info {
     width: 100%;
     max-width: 300px; 
     margin: 0 auto; 
+    padding: 0px 0px;
   }
 
   .info-item {
     flex-direction: column;
     text-align: center;
+  }
+
+  .form-title {
+    font: 400 26px Inter, sans-serif;
+    text-align: center; 
+  }
+  .info-title {
+    font: 400 26px Inter, sans-serif;
+    text-align: center;
+    margin-top: 10px;
   }
 }
 </style>

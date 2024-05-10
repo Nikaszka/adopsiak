@@ -10,6 +10,7 @@ import AdoptionForm from './views/AdoptionForm.vue'
 import LoginPage from './views/LoginPage.vue'
 import AddAnimal from './views/AddAnimal.vue'
 import Admin from './views/Admin.vue'
+import EditAnimal from './views/EditAnimal.vue'
 import { isUserLogged } from './session.js'
 
 const router = createRouter({
@@ -65,6 +66,14 @@ const router = createRouter({
       {
         path: '/admin',
         component: Admin,
+        meta: {
+          requireAuth: true
+        }
+      },
+      {
+        path: '/animal/edit/:id',
+        component: EditAnimal,
+        props: true,
         meta: {
           requireAuth: true
         }

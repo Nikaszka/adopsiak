@@ -234,5 +234,8 @@ export default {
   .step-image {
     display: none;
   }
+  .adoption-process {
+  margin: 5px;
+  }
 }
 </style>

@@ -1,11 +1,12 @@
 <template>
-  <div class="percent-tax-rate-box">
+  <!-- <div class="percent-tax-rate-box">
     <div class="percent-tax-rate-title">Pomóż naszym zwierzakom przekazując 1,5% swojego podatku</div>
     <div class="percent-tax-rate-images">
       <img v-for="(image, index) in images" :key="index" :src="image.src" :alt="image.alt" class="image-item" />
     </div>
     <div class="KRS-info">KRS: 1234567899</div>
-  </div>
+  </div> -->
+  <PercentTax></PercentTax>
 
   <section class="donation-items">
     <h2 class="donation-items__title">Dary rzeczowe, które przyjmuje schronisko:</h2>
@@ -70,18 +71,20 @@
   </section>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      images: [
-        { src: "/kot_syjamski.png", alt: "obrazek" },
-        { src: "/pies1.jpg", alt: "obraz2" },
-        { src: "/pies3.jpg", alt: "obraz3" }
-      ]
-    };
-  }
-};
+<script setup>
+import PercentTax from '../components/PercentTax.vue';
+
+// export default {
+//   data() {
+//     return {
+//       images: [
+//         { src: "/kot_syjamski.png", alt: "obrazek" },
+//         { src: "/pies1.jpg", alt: "obraz2" },
+//         { src: "/pies3.jpg", alt: "obraz3" }
+//       ]
+//     };
+//   }
+// };
 </script>
 
 <style scoped>
