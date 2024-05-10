@@ -1,6 +1,6 @@
 <template>
     <div class="welcome-page">
-        <h1>Witaj, {{ username }}!</h1>
+        <h1>Witaj, <i style="color: rgb(94, 169, 59);">{{ username }}</i>!</h1>
         <p>Jesteś zalogowany jako administrator.</p>
         <p>Tutaj możesz zarządzać zawartością strony.</p>
         <div class="logout-button">

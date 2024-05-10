@@ -87,6 +87,28 @@ namespace AdoPsiak.Controllers
 
             return Accepted();
         }
+        [HttpDelete("{id}/deletePhoto")]
+        public async Task<IActionResult> DeleteAnimalPhoto(int id)
+        {
+            var animal = await _context.Animals.FindAsync(id);
+
+            if (animal is null)
+            {
+                return NotFound("Animal not found");
+
+            }
+            
+            var animalPhoto = await _context.AnimalPhotos.FindAsync(animal.AnimalPhotoId);
+            
+            if (animal.AnimalPhotoId is null || animalPhoto is null)
+            {
+                return NotFound("Animal Photo not found");
+            }
+            _context.AnimalPhotos.Remove(animalPhoto);
+            animal.AnimalPhotoId = null;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllAnimals(int page, int pageSize, string? genus, string? gender)

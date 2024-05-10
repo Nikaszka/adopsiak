@@ -1,4 +1,3 @@
-
 <template>
   <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id } }" class="router-link-active">
     <div class="animal-card">
@@ -18,11 +17,8 @@
         <span class="location-address">{{ animal.localization }}</span>
       </div>
       <div v-if='store.userLogged' class="animal-editing">
-        <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id } }"
-          class="editing-button">Edytuj</router-link>
-      
-          <!-- @delate - metoda z  https://localhost:7241/Animals/delete?id=20-->
-        <button class="deleting-button">Usuń</button>
+        <router-link :to="`/animal/edit/${animal.id}`" class="editing-button">Edytuj</router-link>
+        <router-link :to="`/animals`" class="deleting-button" @click="deleteAnimal(animal)">Usuń</router-link>
       </div>
 
     </div>
@@ -37,32 +33,56 @@ const getPhoto = (animalPhotoId) => {
   return `${baseUrl}${animalPhotoId}`;
 };
 
-import { refreshStore, store } from '@/session.js';
-// onMounted(refreshStore);
+import { store } from '@/session.js';
 
+const deleteAnimal = async (animal) => {
+  const confirmed = window.confirm(`"${animal.name}": Czy na pewno chcesz usunąć to zwierzę?`);
+  if (confirmed) {
+
+    try {
+      const response = await fetch(`https://localhost:7241/Animals/delete?id=${animal.id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('Animal deleted successfully');
+        window.location.reload();
+      } else {
+        console.error('Failed to delete animal');
+      }
+    } catch (error) {
+      console.error('Error deleting animal:', error);
+    }
+  }
+};
 </script>
 
 <style scoped>
-.animal-editing{
+.animal-editing {
   display: flex;
-  margin-top: 10px;  
+  margin-top: 10px;
   margin-bottom: 0;
   width: 100%;
 }
-.editing-button{
+
+.editing-button {
   text-decoration: none;
   background-color: rgb(94, 169, 59);
   flex: 1;
-  color:white;
+  color: white;
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.deleting-button{
+
+.deleting-button {
   text-decoration: none;
   background-color: #b25959;
   flex: 1;
   border: none;
-  color:white;
+  color: white;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 

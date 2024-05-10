@@ -8,35 +8,36 @@
       <div class="animal-desciption">
         <div class="animal-breed">
           <font-awesome-icon icon="paw" class="info-icon" />
-          <input type="text" id="myInput" :value="animal.breed" class="breed-name"></input>
+          <input type="text" id="myInput" :value="animal.breed" class="breed-name" disabled></input>
         </div>
         <div class="animal-gender">
           <font-awesome-icon icon="venus-mars" class="info-icon" />
-          <input type="text" id="myInput" :value="getGenderLabel(animal.gender) + ', ' + animal.age" class="gender-age"></input>
+          <input type="text" id="myInput" :value="getGenderLabel(animal.gender) + ', ' + animal.age" class="gender-age"
+            disabled></input>
         </div>
         <div class="animal-location">
           <font-awesome-icon icon="location-dot" class="info-icon" />
-          <input type="text" id="myInput" :value="animal.localization" class="location-address"></input>
+          <input type="text" id="myInput" :value="animal.localization" class="location-address" disabled></input>
         </div>
         <div class="other-benefits">
           <div class="animal-benefits">
             <font-awesome-icon icon="heart" class="heart-icon" />
-            <input type="text" id="myInput" value="Uwielbia pieszczoty"></input>
+            <input type="text" id="myInput" value="Uwielbia pieszczoty" disabled></input>
           </div>
           <div class="animal-benefits">
             <font-awesome-icon icon="heart" class="heart-icon" />
-            <input type="text" id="myInput" value="Uwielbia zabawę" class="gender-age"></input>
+            <input type="text" id="myInput" value="Uwielbia zabawę" class="gender-age" disabled></input>
           </div>
           <div class="animal-benefits">
             <font-awesome-icon icon="heart" class="heart-icon" />
-            <input type="text" id="myInput" value="Akceptuje inne zwierzęta"></input>
+            <input type="text" id="myInput" value="Akceptuje inne zwierzęta" disabled></input>
           </div>
         </div>
       </div>
 
     </div>
     <div class="description">
-      <textarea class="text-area" placeholder="Description">
+      <textarea class="text-area" placeholder="Description" disabled>
       {{ animal.description }}
       </textarea>
     </div>
@@ -85,7 +86,6 @@ const fetchAnimal = async () => {
 };
 
 onMounted(fetchAnimal);
-// const description = ref("Tutaj spotykasz Królewnę - roczną kicię o zielonych oczach i puszystym  futerku, która weszła do naszego schroniska z uroczym uśmiechem na  pyszczku. Królewna to kwintesencja energii i radości. Zawsze gotowa do  zabawy i szalonych akrobacji, ta malutka kotka sprawi, że twoje dni będą  pełne uśmiechu i miłości. Jej delikatne mruczenie jest jak melodia dla  uszu, a czułe przytulenie potrafi rozgrzać serce każdego. Milusia szuka  kochającego domu, w którym będzie mogła rozwinąć swoje skrzydełka i zaskakiwać swoim urokiem każdego dnia. Czy to ty jesteś tą wyjątkową  osobą, na którą Królewna czeka? Przyjdź i pozwól tej małej kulce futra  wprowadzić więcej radości do twojego życia!")
 </script>
 
 <style scoped>
@@ -212,7 +212,7 @@ onMounted(fetchAnimal);
     font: italic 400 30px Inter, sans-serif;
     margin: 10px;
     text-align: center;
-}
+  }
 }
 
 .animal-data {
@@ -315,17 +315,27 @@ onMounted(fetchAnimal);
     font: italic 400 15px Inter, sans-serif;
     /* margin: 10px; */
   }
-.animal-location input,
-.animal-gender input,
-.animal-breed input,
-.animal-benefits input{
-  font: italic 400 13px Inter, sans-serif;
+
+  .animal-location input,
+  .animal-gender input,
+  .animal-breed input,
+  .animal-benefits input {
+    font: italic 400 13px Inter, sans-serif;
+  }
+
+  .animal-location,
+  .animal-gender,
+  .animal-breed,
+  .animal-benefits {
+    padding: 3px;
+  }
 }
-.animal-location,
-.animal-gender,
-.animal-breed,
-.animal-benefits{
-  padding: 3px;
+
+input[disabled]{
+  background-color: white;
 }
+textarea[disabled]
+{
+  background-color: white;
 }
 </style>
