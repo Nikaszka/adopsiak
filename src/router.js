@@ -80,8 +80,15 @@ const router = createRouter({
           requireAuth: true
         }
       },
-    ]
-})
+    ],
+    scrollBehavior(to, from, savedPosition) {
+      if (to.hash) {
+        return { el: to.hash };
+      } else {
+        return { top: 80 };
+      }
+    }
+});
 
 router.beforeEach((to, from, next) => {
   if(to.meta.loginPage) {

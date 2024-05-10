@@ -73,7 +73,9 @@
           <option value=0>Do adopcji</option>
           <option value=1>Adoptowany</option>
         </select>
-        <button @click="saveChanges" class="submit-button">Zapisz zmiany</button>
+        <router-link :to="'/animals'">
+          <button @click="saveChanges" class="submit-button">Zapisz zmiany</button>
+        </router-link>
       </div>
     </div>
   </div>
