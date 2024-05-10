@@ -2,7 +2,6 @@
   <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id } }" class="router-link-active">
     <div class="animal-card">
       <img v-if="animal.animalPhotoId" :src='getPhoto(animal.animalPhotoId)' :alt="animal.name" class="animal-image" />
-      <img v-if="!animal.animalPhotoId" :alt="animal.name" class="animal-image" />
       <h3 class="animal-name">{{ animal.name }}</h3>
       <div class="animal-breed">
         <font-awesome-icon icon="paw" />
@@ -20,27 +19,28 @@
         <router-link :to="`/animal/edit/${animal.id}`" class="editing-button">Edytuj</router-link>
         <router-link :to="`/animals`" class="deleting-button" @click="deleteAnimal(animal)">Usuń</router-link>
       </div>
-
     </div>
   </router-link>
 </template>
 
 <script setup>
-const props = defineProps(['animal'])
+import { defineProps } from 'vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { refreshStore, store } from '@/session.js';
 
+const props = defineProps(['animal']);
 const baseUrl = 'https://localhost:7241/AnimalPhoto/';
 const getPhoto = (animalPhotoId) => {
   return `${baseUrl}${animalPhotoId}`;
 };
-
-import { store } from '@/session.js';
 
 const deleteAnimal = async (animal) => {
   const confirmed = window.confirm(`"${animal.name}": Czy na pewno chcesz usunąć to zwierzę?`);
   if (confirmed) {
 
     try {
-      const response = await fetch(`https://localhost:7241/Animals/delete?id=${animal.id}`, {
+      const response = await fetch(`https://localhost:7241/Animals/delete/${animal.id}`, {
         method: 'DELETE',
       });
 

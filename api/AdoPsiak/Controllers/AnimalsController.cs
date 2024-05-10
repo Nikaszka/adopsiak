@@ -164,7 +164,7 @@ namespace AdoPsiak.Controllers
             return Ok(animal);
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteAnimal(int id)
         {
             var animal = await _context.Animals.FindAsync(id);

@@ -126,7 +126,6 @@ async function uploadImage() {
 
   } catch (error) {
     console.error('Error uploading image:', error);
-    alert('Failed to upload image.');
   }
 }
 
@@ -185,6 +184,7 @@ const saveChanges = async () => {
         deleteAnimalPhoto(props.id)
       }
       uploadImage()
+      window.location.reload();
     }
 
     console.log('Changes saved successfully:', data)

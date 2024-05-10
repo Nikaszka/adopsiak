@@ -26,6 +26,7 @@ const router = createRouter({
       }, 
       {
         path: '/Animals',
+        name: 'Animals',
         component: Animals
       },
       {
@@ -72,6 +73,7 @@ const router = createRouter({
       },
       {
         path: '/animal/edit/:id',
+        name: 'EditAnimal',
         component: EditAnimal,
         props: true,
         meta: {
