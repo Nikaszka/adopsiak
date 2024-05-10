@@ -14,11 +14,6 @@
     </form>
     <div v-if="loginFailed">Niepoprawne dane logowania</div>
   </div>
-
-
-  <div>
-    <button v-if="isLoggedIn" @click="dodaj">Dodaj</button>
-  </div>
 </template>
 
 <script setup>
