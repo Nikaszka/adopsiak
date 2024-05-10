@@ -1,9 +1,7 @@
-
 <template>
   <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id } }" class="router-link-active">
     <div class="animal-card">
       <img v-if="animal.animalPhotoId" :src='getPhoto(animal.animalPhotoId)' :alt="animal.name" class="animal-image" />
-      <img v-if="!animal.animalPhotoId" :alt="animal.name" class="animal-image" />
       <h3 class="animal-name">{{ animal.name }}</h3>
       <div class="animal-breed">
         <font-awesome-icon icon="paw" />
@@ -17,29 +15,43 @@
         <font-awesome-icon icon="location-dot" />
         <span class="location-address">{{ animal.localization }}</span>
       </div>
-      <div v-if='store.userLogged' class="animal-editing">
-        <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id } }"
-          class="editing-button">Edytuj</router-link>
-      
-          <!-- @delate - metoda z  https://localhost:7241/Animals/delete?id=20-->
-        <button class="deleting-button">Usuń</button>
+      <div v-if="store.userLogged" class="animal-editing">
+        <router-link :to="{ name: 'EditAnimal', params: { id: animal.id } }" class="editing-button">Edytuj</router-link>
+        <button @click="deleteAnimal" class="deleting-button">Usuń</button> <!-- Dodany event click -->
       </div>
-
     </div>
   </router-link>
 </template>
 
 <script setup>
-const props = defineProps(['animal'])
+import { defineProps } from 'vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { refreshStore, store } from '@/session.js';
 
+const props = defineProps(['animal']);
 const baseUrl = 'https://localhost:7241/AnimalPhoto/';
 const getPhoto = (animalPhotoId) => {
   return `${baseUrl}${animalPhotoId}`;
 };
 
-import { refreshStore, store } from '@/session.js';
-// onMounted(refreshStore);
+const router = useRouter();
 
+const deleteAnimal = async () => {
+  try {
+    const response = await fetch(`https://localhost:7241/Animals/delete/${props.animal.id}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    console.log('Animal deleted successfully');
+    // Przekierowanie po usunięciu
+    router.push({ name: 'Animals' });
+  } catch (error) {
+    console.error('Error deleting animal:', error);
+  }
+};
 </script>
 
 <style scoped>
