@@ -13,7 +13,13 @@
         </ul>
       </button>
     </div>
-    <button class="find-btn" @click="search">szukaj</button>
+    <div v-if='store.userLogged'>
+      <router-link :to="'/animal/new'">
+        <button class="button-add">+ Dodaj</button>
+      </router-link>
+      </div>
+
+    <!-- <button class="find-btn" @click="search">szukaj</button> -->
   </div>
   <div class="animal-adoption">
     <div class="animal-grid">
@@ -98,35 +104,48 @@ const selectGender = (gender) => {
   resetList();
   fetchAnimals();
 };
+
+
+import { refreshStore, store } from '@/session.js';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+onMounted(refreshStore);
+
 </script>
 
 <style scoped>
-.animal-editing{
+.animal-editing {
   display: flex;
-  margin-top: 10px;  
+  margin-top: 10px;
   margin-bottom: 0;
   width: 100%;
-  
+
 }
-.editing-button{
+
+.editing-button {
   text-decoration: none;
   background-color: rgb(94, 169, 59);
   flex: 1;
-  color:white;
+  color: white;
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.deleting-button{
+
+.deleting-button {
   text-decoration: none;
   background-color: #b25959;
   flex: 1;
   border: none;
-  color:white;
+  color: white;
 }
+
 .router-link-active {
   text-decoration: none;
 
 }
+
 .animal-adoption {
   display: flex;
   flex-direction: column;
@@ -317,5 +336,24 @@ const selectGender = (gender) => {
 
 .gender-options li:hover {
   background-color: rgb(245, 245, 245);
+}
+
+.button-add {
+  border-radius: 20px;
+  background-color: rgb(94, 169, 59);
+  align-self: center;
+  margin-top: 40px;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  font: italic 20px Inter, sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid rgb(94, 169, 59);
+
+}
+
+.button-add:hover {
+  background-color: #96D879;
 }
 </style>

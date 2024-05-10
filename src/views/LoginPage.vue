@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <h2>Login</h2>
+    <h2>Logowanie</h2>
     <form @submit.prevent="login">
       <div class="form-group">
         <label for="email">Email:</label>
@@ -10,7 +10,7 @@
         <label for="password">Password:</label>
         <input type="password" id="password" v-model="password" required />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit">Zaloguj się</button>
     </form>
     <div v-if="loginFailed">Niepoprawne dane logowania</div>
   </div>
@@ -24,6 +24,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import {store} from '@/session.js';
 
 const router = useRouter();
 
@@ -56,6 +57,7 @@ const login = async () => {
     if (response.ok) {
       console.log('Login successful!'); // Tutaj możesz obsłużyć sukces logowania
       router.push('/admin');
+      store.userLogged = true;
       // Na przykład przekierować użytkownika na inną stronę
     } else {
       console.error('Login failed:', response.statusText);
@@ -107,6 +109,8 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  display: block;
+  margin: auto; 
 }
 
 button:hover {

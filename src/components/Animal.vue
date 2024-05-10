@@ -1,3 +1,34 @@
+
+<template>
+  <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id } }" class="router-link-active">
+    <div class="animal-card">
+      <img v-if="animal.animalPhotoId" :src='getPhoto(animal.animalPhotoId)' :alt="animal.name" class="animal-image" />
+      <img v-if="!animal.animalPhotoId" :alt="animal.name" class="animal-image" />
+      <h3 class="animal-name">{{ animal.name }}</h3>
+      <div class="animal-breed">
+        <font-awesome-icon icon="paw" />
+        <span class="breed-name">{{ animal.breed }}</span>
+      </div>
+      <div class="animal-gender">
+        <font-awesome-icon icon="venus-mars" />
+        <span class="gender-age">{{ animal.gender === 0 ? 'samiec' : 'samica' }}, {{ animal.age }}</span>
+      </div>
+      <div class="animal-location">
+        <font-awesome-icon icon="location-dot" />
+        <span class="location-address">{{ animal.localization }}</span>
+      </div>
+      <div v-if='store.userLogged' class="animal-editing">
+        <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id } }"
+          class="editing-button">Edytuj</router-link>
+      
+          <!-- @delate - metoda z  https://localhost:7241/Animals/delete?id=20-->
+        <button class="deleting-button">Usuń</button>
+      </div>
+
+    </div>
+  </router-link>
+</template>
+
 <script setup>
 const props = defineProps(['animal'])
 
@@ -6,33 +37,35 @@ const getPhoto = (animalPhotoId) => {
   return `${baseUrl}${animalPhotoId}`;
 };
 
+import { refreshStore, store } from '@/session.js';
+// onMounted(refreshStore);
+
 </script>
 
-
-<template>
-        <router-link :to="{ name: 'SelectedAnimal', params: { id: animal.id }}" class="router-link-active">
-          <div class="animal-card">
-            <!-- <img src='https://localhost:7241/AnimalPhoto/8439f023-f3b1-4fb2-af6e-ab9f4332b3c2' :alt="animal.name" class="animal-image" /> -->
-            <img v-if="animal.animalPhotoId" :src='getPhoto(animal.animalPhotoId)' :alt="animal.name" class="animal-image" />
-            <img v-if="!animal.animalPhotoId" :alt="animal.name" class="animal-image" />
-            <h3 class="animal-name">{{ animal.name }}</h3>
-            <div class="animal-breed">
-              <font-awesome-icon icon="paw" />
-              <span class="breed-name">{{ animal.breed }}</span>
-            </div>
-            <div class="animal-gender">
-              <font-awesome-icon icon="venus-mars" />
-              <span class="gender-age">{{ animal.gender === 0 ? 'samiec' : 'samica' }}, {{ animal.age }}</span>
-            </div>
-            <div class="animal-location">
-              <font-awesome-icon icon="location-dot" />
-              <span class="location-address">{{ animal.localization }}</span>
-            </div>
-          </div>
-        </router-link>
-</template>
-
 <style scoped>
+.animal-editing{
+  display: flex;
+  margin-top: 10px;  
+  margin-bottom: 0;
+  width: 100%;
+}
+.editing-button{
+  text-decoration: none;
+  background-color: rgb(94, 169, 59);
+  flex: 1;
+  color:white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.deleting-button{
+  text-decoration: none;
+  background-color: #b25959;
+  flex: 1;
+  border: none;
+  color:white;
+}
+
+
 .router-link-active {
   text-decoration: none;
 }
@@ -43,7 +76,7 @@ const getPhoto = (animalPhotoId) => {
   display: flex;
   width: 100%;
   flex-grow: 1;
-  padding-bottom: 9px;
+  /* padding-bottom: 9px; */
   flex-direction: column;
   font-size: 16px;
   color: #000;
@@ -51,10 +84,12 @@ const getPhoto = (animalPhotoId) => {
   text-align: center;
   margin: 0 auto;
 }
+
 @media (max-width: 991px) {
   .animal-card {
     margin-top: 40px;
     width: 70%;
+    padding-bottom: 9px;
   }
 }
 

@@ -1,147 +1,286 @@
 <template>
-    <div class="add-animal-container">
-      <h2>Dodaj nowe zwierzę</h2>
-      <form @submit.prevent="dodajZwierze">
-        <div class="form-group">
-          <label for="name">Imię:</label>
-          <input type="text" id="name" v-model="form.name" required>
+  <div class="add-animal-container">
+    <h2>Dodaj nowe zwierzę</h2>
+    <form @submit.prevent="submitForm">
+      <div class="animal-type-gender form-group">
+        <label for="animalType">Zwierzę:</label>
+        <select id="animalType" v-model="formData.genus">
+          <option :value="0">Kot</option>
+          <option :value="1">Pies</option>
+        </select>
+        <label for="gender">Płeć:</label>
+        <select id="gender" v-model="formData.gender">
+          <option :value="1">Samica</option>
+          <option :value="0">Samiec</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Imię:</label>
+        <input type="text" id="name" v-model="formData.name" required>
+      </div>
+      <div class="form-group">
+        <label for="age">Wiek:</label>
+        <input type="text" id="age" v-model="formData.age" required>
+      </div>
+      <div class="form-group">
+        <label for="breed">Rasa:</label>
+        <input type="text" id="breed" v-model="formData.breed" required>
+      </div>
+      <div class="form-group">
+        <label for="localization">Lokalizacja:</label>
+        <input type="text" id="localization" v-model="formData.localization" required>
+      </div>
+      <div class="form-group">
+        <label for="image">Zdjęcie:</label>
+        <input type="file" id="image" ref="fileInput" accept="image/*" @change="handleFileChange">
+      </div>
+      <div class="form-group">
+        <label for="description">Opis:</label>
+        <textarea id="description" v-model="formData.description" rows="4"></textarea>
+      </div>
+      <div class="other-benefits">
+        <div class="animal-benefits">
+          <font-awesome-icon icon="heart" class="heart-icon" />
+          <input type="text" id="myInput" value="Uwielbia pieszczoty"></input>
         </div>
-        <div class="form-group">
-          <label for="age">Wiek:</label>
-          <input type="text" id="age" v-model="form.age" required>
+        <div class="animal-benefits">
+          <font-awesome-icon icon="heart" class="heart-icon" />
+          <input type="text" id="myInput" value="Uwielbia zabawę" class="gender-age"></input>
         </div>
-        <div class="form-group">
-          <label for="breed">Rasa:</label>
-          <input type="text" id="breed" v-model="form.breed" required>
+        <div class="animal-benefits">
+          <font-awesome-icon icon="heart" class="heart-icon" />
+          <input type="text" id="myInput" value="Akceptuje inne zwierzęta"></input>
         </div>
-        <div class="form-group">
-          <label for="localization">Lokalizacja:</label>
-          <input type="text" id="localization" v-model="form.localization" required>
-        </div>
-        <div class="form-group">
-          <label for="image">Zdjęcie:</label>
-          <input type="file" id="image" accept="image/*" @change="handleImageUpload">
-        </div>
-        <div class="form-group">
-          <label for="description">Opis:</label>
-          <textarea id="description" v-model="form.description" rows="4"></textarea>
-        </div>
-        <!-- Dodane inputy checkbox -->
-        <div class="form-group">
-          <label for="childFriendly">Przyjazny dzieciom:</label>
-          <input type="checkbox" id="childFriendly" v-model="form.childFriendly">
-        </div>
-        <div class="form-group">
-          <label for="catFriendly">Przyjazny kotom:</label>
-          <input type="checkbox" id="catFriendly" v-model="form.catFriendly">
-        </div>
-        <div class="form-group">
-          <label for="dogFriendly">Przyjazny psom:</label>
-          <input type="checkbox" id="dogFriendly" v-model="form.dogFriendly">
-        </div>
-        <div class="form-group">
-          <label for="likesToPlay">Lubi bawić się:</label>
-          <input type="checkbox" id="likesToPlay" v-model="form.likesToPlay">
-        </div>
-        <div class="form-group">
-          <label for="likesToCuddle">Lubi przytulać się:</label>
-          <input type="checkbox" id="likesToCuddle" v-model="form.likesToCuddle">
-        </div>
-        <div class="form-group">
-          <label for="doesntLikeShelter">Nie lubi schroniska:</label>
-          <input type="checkbox" id="doesntLikeShelter" v-model="form.doesntLikeShelter">
-        </div>
-        <button type="submit">Dodaj</button>
-      </form>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue';
-  import axios from 'axios';
-  
-  const form = ref({
+      </div>
+
+      <button class="button-add" type="submit">Dodaj</button>
+    </form>
+  </div>
+</template>
+
+<script setup>
+
+import { computed, ref, onMounted, reactive } from 'vue'
+const props = defineProps(['id'])
+
+const formData = ref({
+  name: '',
+  genus: 1,
+  gender: 0,
+  age: '',
+  breed: '',
+  localization: '',
+  description: '',
+  status: 0,
+});
+
+const fileInput = ref(null);
+let selectedFile = null;
+
+function handleFileChange(event) {
+  if (event) {
+    selectedFile = event.target.files[0];
+  } else {
+    selectedFile = null;
+  }
+}
+
+async function uploadImage() {
+  const imageData = new FormData();
+  imageData.append('photo', selectedFile);
+
+  try {
+    const response = await fetch(`https://localhost:7241/Animals/${newAnimalId.value}/addPhoto`, {
+      method: 'POST',
+      body: imageData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to upload image.');
+    }
+
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    alert('Failed to upload image.');
+  }
+}
+
+
+const newAnimalId = ref();
+const submitForm = async () => {
+
+  const url = "https://localhost:7241/Animals/add";
+  if (allFieldsFilled()) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData.value)
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      newAnimalId.value = data;
+
+      uploadImage();
+
+      console.log('Formularz został pomyślnie przesłany:', newAnimalId.value);
+      resetForm();
+    } catch (error) {
+      console.error('Wystąpił błąd podczas wysyłania formularza:', error);
+    }
+  } else {
+    alert("Proszę uzupełnić wszystkie pola formularza.")
+  }
+
+};
+
+const resetForm = () => {
+  formData.value = {
     name: '',
+    genus: 1,
+    gender: 0,
     age: '',
     breed: '',
     localization: '',
-    image: null,
     description: '',
-    childFriendly: false,
-    catFriendly: false,
-    dogFriendly: false,
-    likesToPlay: false,
-    likesToCuddle: false,
-    doesntLikeShelter: false,
-  });
-  
-  const dodajZwierze = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('name', form.value.name);
-      formData.append('age', form.value.age);
-      formData.append('breed', form.value.breed);
-      formData.append('localization', form.value.localization);
-      formData.append('image', form.value.image);
-      formData.append('description', form.value.description); // Dodanie opisu
-      formData.append('childFriendly', form.value.childFriendly);
-      formData.append('catFriendly', form.value.catFriendly);
-      formData.append('dogFriendly', form.value.dogFriendly);
-      formData.append('likesToPlay', form.value.likesToPlay);
-      formData.append('likesToCuddle', form.value.likesToCuddle);
-      formData.append('doesntLikeShelter', form.value.doesntLikeShelter);
-      
-      const response = await axios.post('https://localhost:7241/Animals/add', formData);
-      console.log('Odpowiedź serwera:', response.data);
-      // Po udanym dodaniu możemy przekierować użytkownika lub wykonać inne akcje
-    } catch (error) {
-      console.error('Błąd podczas dodawania zwierzęcia:', error);
-      // Obsłuż błąd, np. wyświetlając komunikat dla użytkownika
-    }
-  };
-  
-  const handleImageUpload = (event) => {
-    form.value.image = event.target.files[0];
-  };
-  </script>
-  
-  <style scoped>
-  .add-animal-container {
-    max-width: 600px;
-    margin: 0 auto;
   }
-  
-  .form-group {
-    margin-bottom: 20px;
+  selectedFile = null;
+  fileInput.value.value = ''
+  handleFileChange();
+
+};
+
+
+function allFieldsFilled() {
+  // Sprawdź, czy wszystkie pola są uzupełnione
+  if (!selectedFile) {
+    alert('Please select a file.');
+    return false;
   }
-  
-  label {
-    display: block;
-    font-weight: bold;
+
+  return Object.values(formData.value).every(value => value !== "")
+}
+
+</script>
+
+<style scoped>
+.add-animal-container {
+  max-width: 600px;
+  min-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+.info-icon,
+.heart-icon {
+  font-size: 35px;
+}
+
+.heart-icon {
+  color: green;
+}
+
+.animal-form-title {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+
+  .info-icon,
+  .heart-icon {
+    font-size: 18px;
   }
-  
-  input[type="text"],
-  input[type="file"],
-  textarea {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+  .other-benefits {
+    margin-top: 10px;
   }
-  
-  button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+}
+
+.animal-benefits {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  padding: 10px;
+  gap: 15px;
+}
+
+.animal-benefits input {
+  font: italic 400 16px Inter, sans-serif;
+}
+
+@media (max-width: 900px) {
+  .text-area {
+    font: italic 400 15px Inter, sans-serif;
+    /* margin: 10px; */
   }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
+
+  .animal-benefits input {
+    font: italic 400 13px Inter, sans-serif;
   }
-  </style>
-  
+
+  .animal-benefits {
+    padding: 3px;
+  }
+}
+
+.button-add {
+  border-radius: 20px;
+  background-color: rgb(94, 169, 59);
+  align-self: center;
+  margin-top: 40px;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  font: italic 20px Inter, sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid rgb(94, 169, 59);
+  display: block;
+  margin: auto;
+}
+
+.button-add:hover {
+  background-color: #96D879;
+}
+
+.animal-type-gender {
+  display: flex;
+  align-items: center;
+}
+
+.animal-type-gender label {
+  margin-right: 10px;
+}
+
+.animal-type-gender select {
+  width: 80px;
+  /* padding-right: 10px; */
+  margin-right: 20px;
+}
+</style>

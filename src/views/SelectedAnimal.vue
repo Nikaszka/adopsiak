@@ -37,7 +37,7 @@
     </div>
     <div class="description">
       <textarea class="text-area" placeholder="Description">
-      {{ description }}
+      {{ animal.description }}
       </textarea>
     </div>
     <div class="animal-help">
@@ -85,7 +85,7 @@ const fetchAnimal = async () => {
 };
 
 onMounted(fetchAnimal);
-const description = ref("Tutaj spotykasz Królewnę - roczną kicię o zielonych oczach i puszystym  futerku, która weszła do naszego schroniska z uroczym uśmiechem na  pyszczku. Królewna to kwintesencja energii i radości. Zawsze gotowa do  zabawy i szalonych akrobacji, ta malutka kotka sprawi, że twoje dni będą  pełne uśmiechu i miłości. Jej delikatne mruczenie jest jak melodia dla  uszu, a czułe przytulenie potrafi rozgrzać serce każdego. Milusia szuka  kochającego domu, w którym będzie mogła rozwinąć swoje skrzydełka i zaskakiwać swoim urokiem każdego dnia. Czy to ty jesteś tą wyjątkową  osobą, na którą Królewna czeka? Przyjdź i pozwól tej małej kulce futra  wprowadzić więcej radości do twojego życia!")
+// const description = ref("Tutaj spotykasz Królewnę - roczną kicię o zielonych oczach i puszystym  futerku, która weszła do naszego schroniska z uroczym uśmiechem na  pyszczku. Królewna to kwintesencja energii i radości. Zawsze gotowa do  zabawy i szalonych akrobacji, ta malutka kotka sprawi, że twoje dni będą  pełne uśmiechu i miłości. Jej delikatne mruczenie jest jak melodia dla  uszu, a czułe przytulenie potrafi rozgrzać serce każdego. Milusia szuka  kochającego domu, w którym będzie mogła rozwinąć swoje skrzydełka i zaskakiwać swoim urokiem każdego dnia. Czy to ty jesteś tą wyjątkową  osobą, na którą Królewna czeka? Przyjdź i pozwól tej małej kulce futra  wprowadzić więcej radości do twojego życia!")
 </script>
 
 <style scoped>
