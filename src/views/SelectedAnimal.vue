@@ -41,11 +41,14 @@
       {{ animal.description }}
       </textarea>
     </div>
+    <div v-if="paymentCompleted">
+      <p class="InfoAfterPayment">Dziękujemy! Twoja wpłata została przyjęta</p>
+    </div>
     <div class="animal-help">
       <div class="animal-donation">
         <div class="animal-donation-title">Zaangażuj się w pomoc dla tego zwierzaka</div>
-        <input type="text" placeholder="0,00 zł" class="donation-input">
-        <div><button class="donation-button">Wesprzyj finansowo</button></div>
+        <input type="text" class="donation-input" v-model="money.value" placeholder="0,00 zł">
+        <div><button @click="PayForAnimal" class="donation-button">Wesprzyj finansowo</button></div>
       </div>
       <a :href="'/animal/adoption-form/' + props.id" class="router-link-active">
         <div>
@@ -60,7 +63,40 @@
 
 </template>
 <script setup>
+let paymentCompleted =  false;
 
+const money = ref({
+  name: "",
+  value: ""
+});
+
+const PayForAnimal = async () => {
+  const url = "https://localhost:7241/MonetarySupport/add";
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(money.value)
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log('Płatność została zapisana:', data);
+      paymentCompleted = true;
+      resetMoneyBox();
+    } catch (error) {
+      console.error('Wystąpił błąd podczas wykonywania płatności:', error);
+  } 
+};
+const resetMoneyBox = () => {
+  money.value = {
+    value: 0,
+    name:''
+  };
+};
 const getGenderLabel = (gender) => {
   return gender == 1 ? 'Samica' : 'Samiec';
 }
@@ -89,6 +125,9 @@ onMounted(fetchAnimal);
 </script>
 
 <style scoped>
+.InfoAfterPayment{
+  color:green;
+}
 .info-icon,
 .heart-icon {
   font-size: 35px;
