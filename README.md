@@ -6,6 +6,9 @@
 Adopsiak to aplikacja internetowa schroniska dla psów i kotów. Umożliwia zapoznanie się ze zwierzętami przebywającymi w schronisku, jak również wsparcie ich finansowo lub poprzez adopcję.
 # Opis techniczny
 Projekt aplikacji został napisany w oparciu o Vue 3, gdzie do strukturyzacji kodu zostało wykorzystane Composition API, natomiast do płynnej nawigacji między różnymi widokami został zastosowany Vue Router. Aplikacja jest responsywna. W projekcie użyto SASS do  usprawnienia procesu stylizacji CSS.
+
+API zostało stworzone w oparciu o framework C# .NET Core 8. Do autoryzacji, umożliwiającej logowanie wyłącznie dla administratora strony, użyto pakietu ASP.NET Core Identity.
+W aplikacji wykorzystano Microsoft SQL Server do przechowywania danych.
 ## Podział na ekrany
 - Widok strony głównej
 - Widok całej listy zwierząt (zakładka 'Zwierzęta')
