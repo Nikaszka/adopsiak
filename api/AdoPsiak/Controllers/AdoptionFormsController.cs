@@ -23,12 +23,14 @@ namespace AdoPsiak.Controllers
         public async Task<IActionResult> AddForm([FromBody] NewAdoptionFormDto formDto)
         {
             var animal = await _context.Animals.FirstAsync(animal => animal.Id == formDto.SelectedAnimalId);
+            Console.WriteLine("Animal: " + animal);
 
-            var form = new AdoptionForm { 
+            var form = new AdoptionForm {
                 FirstName = formDto.FirstName,
                 LastName = formDto.LastName,
                 City = formDto.Address.City,
                 SelectedAnimal = animal,
+                SelectedAnimalId = formDto.SelectedAnimalId,
                 EmailAddress = formDto.EmailAddress,
                 AboutEnviroment = formDto.Answer.AboutEnviroment,
                 PhoneNumber = formDto.Address.PhoneNumber,
@@ -59,6 +61,8 @@ namespace AdoPsiak.Controllers
             var form = await _context.AdoptionForms.FindAsync(id);
             if (form == null)
                 return NotFound();
+            var animal = await _context.Animals.FindAsync(form.SelectedAnimalId);
+            form.SelectedAnimal = animal;
             return Ok(form);
         }
     }

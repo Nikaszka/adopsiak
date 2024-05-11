@@ -13,6 +13,7 @@
         public required string Voivodeship { get; set; } //województwo
         public required string ZipCode {  get; set; } //kod pocztowy
         public required Animal SelectedAnimal{ get; set;}
+        public required int SelectedAnimalId { get; set; }
         public required string AboutEnviroment { get; set; }
         public required string AboutExperienceWithAnimals { get; set; }
         public required string AboutOtherAnimals { get; set; }

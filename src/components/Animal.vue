@@ -15,7 +15,7 @@
         <font-awesome-icon icon="location-dot" />
         <span class="location-address">{{ animal.localization }}</span>
       </div>
-      <div v-if='store.userLogged' class="animal-editing">
+      <div v-if="store.userLogged && showButtons" class="animal-editing">
         <router-link :to="`/animal/edit/${animal.id}`" class="editing-button">Edytuj</router-link>
         <router-link :to="`/animals`" class="deleting-button" @click="deleteAnimal(animal)">Usuń</router-link>
       </div>
@@ -29,7 +29,14 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { refreshStore, store } from '@/session.js';
 
-const props = defineProps(['animal']);
+const props = defineProps({
+  animal: Object,
+  showButtons: {
+    type: Boolean,
+    default: true,
+  }
+});
+
 const baseUrl = 'https://localhost:7241/AnimalPhoto/';
 const getPhoto = (animalPhotoId) => {
   return `${baseUrl}${animalPhotoId}`;
