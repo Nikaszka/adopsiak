@@ -64,6 +64,9 @@ const router = createRouter({
       {
         path: '/animal/new',
         component: AddAnimal,
+        meta: {
+          requireAuth: true
+        }
       },
       {
         path: '/admin',
@@ -85,7 +88,10 @@ const router = createRouter({
         path: '/AdoptionForms/:id',
         name: 'FormDetails',
         component: FormDetails,
-        props: true
+        props: true,
+        meta: {
+          requireAuth: true
+        }
       },
     ],
     scrollBehavior(to, from, savedPosition) {
